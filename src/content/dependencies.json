@@ -5,6 +5,7 @@
   "cable_repair": ["message_admin"],
   "edugreat_purchase": ["cable_repair"],
   "attendance_basic": ["message_homeroom"],
+  "attendance_unknown": ["phone_guardian"],
   "message_admin": ["equipment_check"],
   "message_approval_return": ["edugreat_purchase"],
   "approval_revision": ["message_approval_return"],

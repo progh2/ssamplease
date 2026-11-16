@@ -74,3 +74,5 @@ i18n.use(initReactI18next).init({ resources: { ko, en }, lng: savedLanguage, fal
 i18n.addResourceBundle('ko', 'translation', { flow: flow.ko, nav: { approval: '에듀그렛' } }, true, true);
 i18n.addResourceBundle('en', 'translation', { flow: flow.en, nav: { approval: 'EduGreat' } }, true, true);
 export default i18n;
+i18n.addResourceBundle('ko', 'translation', { newTasks: { phoneTitle: '보호자 전화 연락', phoneDesc: '결석 사유를 확인하기 위해 보호자에게 연락하고, 통화 결과를 기록하세요.', documentTitle: '방송 장비 구매 공문 작성', documentDesc: '요청 내용을 문서에 옮기고 수신처·금액·첨부를 검토한 뒤 제출하세요.' } }, true, true);
+i18n.addResourceBundle('en', 'translation', { newTasks: { phoneTitle: 'Call the guardian', phoneDesc: 'Contact the guardian about an absence and record the outcome.', documentTitle: 'Prepare an equipment purchase memo', documentDesc: 'Draft the requested memo and review its recipient, amount and attachment.' } }, true, true);

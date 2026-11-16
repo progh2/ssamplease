@@ -37,3 +37,39 @@ fieldset:disabled { opacity: .65; }
 .desk-exercise dd { margin: 0; }
 .desk-exercise select { padding: 10px; margin: 8px; }
 .desk-exercise [role=alert] { color: #8b3e35; }
+.game-grid { height: min(76vh, 800px); min-height: 480px; align-items: stretch; }
+.scene-panel { height: 100%; min-height: 0; }
+.office-canvas { height: 100%; min-height: 0; }
+.work-panel { min-height: 0; background: rgba(40, 51, 51, .88); backdrop-filter: blur(12px); color: #f6eddc; }
+.work-panel .task-list { min-height: 0; overflow-y: auto; }
+.work-panel .task-card { background: #ffffff12; color: #fff7e7; border: 1px solid #ffffff30; box-shadow: none; }
+.work-panel .task-card p, .work-panel .task-head { color: #e1d8c5; }
+.work-panel .schedule-strip, .work-panel .purchase-record { color: #302c25; }
+.board-toggle { background: #ffffff10; color: #fff4d8; border: 0; padding: 12px; text-align: left; }
+.board-collapsed { align-self: start; }
+.task-workspace { position: fixed; inset: 0; z-index: 15; background: #e5d6b9; color: #332d29; overflow: auto; padding: clamp(16px, 3vw, 48px); }
+.task-workspace header { color: #332d29; max-width: 1200px; border-bottom: 2px solid #a7967c; padding-bottom: 16px; }
+.task-workspace header button { background: #394e49; color: #fff7e7; padding: 12px; border: 0; }
+.workspace-brief, .workspace-body { max-width: 1100px; margin: 24px auto; }
+.workspace-body { padding: clamp(16px, 3vw, 40px); background: #fff9ec; box-shadow: 0 12px 40px #31231125; min-height: 320px; }
+.workspace-body .desk-exercise { border: 0; background: transparent; }
+.workspace-body button { min-height: 44px; }
+.workspace-body input, .workspace-body select, .workspace-body textarea { font: inherit; padding: 10px; max-width: 100%; }
+.workspace-body label { display: block; margin: 12px 0; }
+.workspace-body [role=alert] { color: #8b3028; }
+.modal-backdrop { z-index: 30; }
+@media(max-width:850px) { .game-grid { height: auto; min-height: 0; } .scene-panel { height: 280px; } .work-panel { height: 450px; } .board-collapsed { height: auto; } .task-workspace header { gap: 12px; } .task-workspace header h1 { font-size: 1.2rem; } }
+.school-activity > header { display: block; margin-bottom: 24px; }
+.school-activity h2 { margin: 8px 0; }
+.activity-columns { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(280px, 2fr); gap: 28px; }
+.reference-sheet { padding: 20px; background: #efe8d1; border-top: 6px solid #71856d; line-height: 1.7; }
+.activity-workspace { padding: 20px; background: #fff; border: 1px solid #d1c5ad; }
+.activity-workspace label:not(.check-row) input, .activity-workspace select { display: block; width: 100%; margin-top: 8px; }
+.school-activity button { background: #425f57; color: #fff; padding: 12px 18px; border: 0; margin: 8px 8px 8px 0; }
+.telephone-display { font-size: 72px; color: #314841; text-align: center; }
+.document-preview { border: 1px solid #ddd; padding: 24px; min-height: 260px; line-height: 1.9; }
+.lesson-board { background: #234d40; padding: 32px; color: #fff7e4; border: 10px solid #98734e; }
+.lesson-board [role=alert] { color: #ffcca5; }
+.sequence-slots { display: flex; gap: 16px; list-style-position: inside; padding: 0; }
+.sequence-slots li { flex: 1; padding: 24px 10px; border: 2px dashed #c5d4ad; text-align: center; }
+@media(max-width:700px) { .activity-columns { grid-template-columns: 1fr; } .lesson-board { padding: 16px; } .sequence-slots { gap: 6px; } }

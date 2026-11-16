@@ -41,6 +41,7 @@ export const days: DayDefinition[] = [
     { id: 'class_homeroom', day: 6, kind: 'class', titleKey: 'tasks.classHomeroom.title', descriptionKey: 'tasks.classHomeroom.desc', required: true, variants: [], choices: [{ labelKey: 'actions.example', outcome: 'completed', feedbackKey: 'feedback.classExample' }] },
   ]},
   { day: 7, weekday: 'TUE', titleKey: 'days.7.title', introKey: 'days.7.intro', tasks: [
+    { id: 'phone_guardian', day: 7, kind: 'document', titleKey: 'newTasks.phoneTitle', descriptionKey: 'newTasks.phoneDesc', required: true, variants: [], choices: [{ labelKey: 'actions.pending', outcome: 'resolved_with_issue', feedbackKey: 'feedback.attendancePending' }] },
     { id: 'message_approval_return', day: 7, kind: 'message', titleKey: 'tasks.messageApprovalReturn.title', descriptionKey: 'tasks.messageApprovalReturn.desc', required: true, variants: [], choices: [{ labelKey: 'actions.read', outcome: 'completed', feedbackKey: 'feedback.approvalReturned' }] },
     { id: 'attendance_unknown', day: 7, kind: 'attendance', titleKey: 'tasks.attendanceUnknown.title', descriptionKey: 'tasks.attendanceUnknown.desc', required: true, variants: ['unknown_reason'], choices: [{ labelKey: 'actions.pending', outcome: 'resolved_with_issue', feedbackKey: 'feedback.attendancePending' }] },
     { id: 'approval_revision', day: 7, kind: 'approval', titleKey: 'tasks.approvalRevision.title', descriptionKey: 'tasks.approvalRevision.desc', required: true, variants: ['missing_comparison'], choices: [{ labelKey: 'actions.revise', outcome: 'completed', feedbackKey: 'feedback.approvalResubmitted' }] },
@@ -51,6 +52,7 @@ export const days: DayDefinition[] = [
     { id: 'class_counseling_day', day: 8, kind: 'class', titleKey: 'tasks.classCounselingDay.title', descriptionKey: 'tasks.classCounselingDay.desc', required: true, variants: [], choices: [{ labelKey: 'actions.practice', outcome: 'completed', feedbackKey: 'feedback.classPractice' }] },
   ]},
   { day: 9, weekday: 'THU', titleKey: 'days.9.title', introKey: 'days.9.intro', tasks: [
+    { id: 'official_document', day: 9, kind: 'document', titleKey: 'newTasks.documentTitle', descriptionKey: 'newTasks.documentDesc', required: true, variants: [], choices: [{ labelKey: 'actions.submit', outcome: 'completed', feedbackKey: 'feedback.submitted' }] },
     { id: 'message_approval_done', day: 9, kind: 'message', titleKey: 'tasks.messageApprovalDone.title', descriptionKey: 'tasks.messageApprovalDone.desc', required: true, variants: [], choices: [{ labelKey: 'actions.read', outcome: 'completed', feedbackKey: 'feedback.approvalDone' }] },
     { id: 'grading_review', day: 9, kind: 'grading', titleKey: 'tasks.gradingReview.title', descriptionKey: 'tasks.gradingReview.desc', required: true, variants: ['previous_error'], choices: [{ labelKey: 'actions.score', outcome: 'completed', feedbackKey: 'feedback.graded' }] },
     { id: 'class_admin_day', day: 9, kind: 'class', titleKey: 'tasks.classAdminDay.title', descriptionKey: 'tasks.classAdminDay.desc', required: true, variants: [], choices: [{ labelKey: 'actions.example', outcome: 'completed', feedbackKey: 'feedback.classExample' }] },

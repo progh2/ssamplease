@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { PhoneGame, OfficialDocumentGame, LessonGame } from './components/SchoolActivities';
+import { OmrGame } from './components/OmrGame';
 import { useTranslation } from 'react-i18next';
 import { days } from './content/days';
 import { OfficeScene } from './OfficeScene';
@@ -14,6 +17,9 @@ type View = 'desk' | 'messenger' | 'timetable' | 'approval';
 export function App() {
   const { t, i18n } = useTranslation();
   const [view, setView] = useState<View>('desk');
+  const [selectedTask, setSelectedTask] = useState<string | null>(null);
+  const [boardOpen, setBoardOpen] = useState(true);
+  const en = i18n.language.startsWith('en');
   const saveFailed = useSaveHealth((state) => state.failed);
   const { currentDay, taskStatuses, feedback, completeTask, closeFeedback, advanceDay, reset, accuracy, history, activeScheduledId, enterClassroom, returnToOffice } = useGameStore();
   const day = days.find((entry) => entry.day === currentDay);
@@ -33,7 +39,7 @@ export function App() {
   const visibleTasks = day.tasks.filter((task) => view === 'messenger' ? task.kind === 'message' : view === 'approval' ? task.kind === 'approval' : true);
   const currentLesson = nextLesson(currentDay, taskStatuses);
   const progress = { ...history, ...taskStatuses };
-  return <main className="app-shell">
+  return <main className="app-shell" inert={selectedTask !== null}>
     <header>
       <div><p className="eyebrow">{t('app.week', { week: Math.ceil(currentDay / 5) })} · {day.weekday}</p><h1>{t('app.title')} <small>{t('app.subtitle')}</small></h1></div>
       <div className="header-actions"><span className="save-dot">● {t(saveFailed ? 'flow.saveFailed' : 'app.saved')}</span><button className="ghost" onClick={changeLanguage}>{t('app.language')}</button><button className="ghost" aria-label={t('app.restart')} onClick={restart}>↻</button></div>
@@ -42,7 +48,9 @@ export function App() {
     <section className="story-strip"><div className="day-badge">{String(currentDay).padStart(2, '0')}</div><div><strong>{t('app.day', { day: currentDay })} — {t(day.titleKey)}</strong><p>{t(day.introKey)}</p></div><span className="accuracy">ACC {accuracy}%</span></section>
     <div className="game-grid">
       <section className="scene-panel"><OfficeScene key={activeScheduledId ?? 'office'} classroom={activeScheduledId ? timetable[activeScheduledId].classroom : undefined} /><div className="scene-label">{activeScheduledId ? `${timetable[activeScheduledId].period} · ${timetable[activeScheduledId].classroom}` : t('flow.office')}</div></section>
-      <aside className="work-panel">
+      <aside className={`work-panel ${boardOpen ? '' : 'board-collapsed'}`}>
+        <button className="board-toggle" onClick={() => setBoardOpen(!boardOpen)}>{en ? 'Task board' : '할 일 보드'} {boardOpen ? '−' : '+'}</button>
+        {boardOpen && <>
         <nav>{(['desk', 'messenger', 'timetable', 'approval'] as View[]).map((item) => <button key={item} className={view === item ? 'active' : ''} onClick={() => setView(item)}>{t(`nav.${item}`)}</button>)}</nav>
         <div className="schedule-strip"><span>{activeScheduledId ? t('flow.inClass', { room: timetable[activeScheduledId].classroom, period: timetable[activeScheduledId].period }) : currentLesson ? t('flow.nextClass', { room: timetable[currentLesson.id].classroom, period: timetable[currentLesson.id].period }) : t('flow.deskTime')}</span>{activeScheduledId && <button onClick={returnToOffice}>{t('flow.return')}</button>}</div>
         {view === 'approval' && <PurchaseRecord />}
@@ -58,22 +66,33 @@ export function App() {
               <h2>{t(task.titleKey)}</h2><p>{t(task.descriptionKey)}</p>
               {locked && <p>{prerequisites(task.id).map((id) => t(days.flatMap((entry) => entry.tasks).find((entry) => entry.id === id)!.titleKey)).join(' → ')} → {t(task.titleKey)}</p>}
               {!isDone && needsRoom && <button disabled={locked || currentLesson?.id !== task.id} onClick={() => enterClassroom(task.id)}>{t('flow.enter', { room: scheduled.classroom, period: scheduled.period })}</button>}
+              {!isDone && <button disabled={locked || needsRoom} onClick={() => setSelectedTask(task.id)}>{en ? 'Open task' : '업무 시작'} · {t(task.titleKey)}</button>}
+              {!isDone && createPortal(<section hidden={selectedTask !== task.id} className={`task-workspace workspace-${task.kind}`} role="region" aria-label={t(task.titleKey)}>
+              <header><div><small>{en ? 'WORKSPACE' : '전용 작업 화면'}</small><h1>{t(task.titleKey)}</h1></div><button autoFocus onClick={() => setSelectedTask(null)}>{en ? 'Back to office' : '교무실로 돌아가기'}</button></header>
+              <p className="workspace-brief">{t(task.descriptionKey)}</p>
+              <div className="workspace-body">
               <fieldset disabled={locked || needsRoom} style={{ border: 0, padding: 0, margin: 0 }}>
+              {task.kind === 'class' && <LessonGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.id === 'phone_guardian' && <PhoneGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.id === 'official_document' && <OfficialDocumentGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.id.startsWith('omr_') && <OmrGame missing={task.id === 'omr_missing'} onDone={() => completeTask(task.id, task.choices[0].outcome, t(task.choices[0].feedbackKey))} />}
               {!isDone && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
               {!isDone && task.id === 'cable_repair' && <CableRepair onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
               {!isDone && task.id === 'edugreat_purchase' && <ApprovalForm onDone={() => completeTask(task.id, 'completed', t('feedback.submitted'))} />}
               {!isDone && task.id === 'approval_revision' && <RevisionForm onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}
               {!isDone && task.kind === 'attendance' && <AttendanceSheet unknown={task.id === 'attendance_unknown'} followup={task.id === 'attendance_followup'} onDone={() => completeTask(task.id, task.id === 'attendance_unknown' ? 'resolved_with_issue' : 'completed', t(task.choices[0].feedbackKey))} />}
               {!isDone && task.id === 'exam_pack' && <ExamPack onDone={() => completeTask(task.id, 'completed', t('feedback.examPacked'))} />}
-              {!isDone && !exerciseIds.includes(task.id) && !['cable_repair', 'edugreat_purchase', 'approval_revision', 'exam_pack'].includes(task.id) && task.kind !== 'attendance' && <div className="choices">{task.choices.map((choice, index) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey), task.id === 'grading_partial' && index === 1)}>{t(choice.labelKey)}</button>)}</div>}
+              {!isDone && !task.id.startsWith('omr_') && !exerciseIds.includes(task.id) && !['cable_repair', 'edugreat_purchase', 'approval_revision', 'exam_pack', 'phone_guardian', 'official_document'].includes(task.id) && task.kind !== 'attendance' && task.kind !== 'class' && <div className="choices">{task.choices.map((choice, index) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey), task.id === 'grading_partial' && index === 1)}>{t(choice.labelKey)}</button>)}</div>}
               </fieldset>
+              </div></section>, document.body)}
             </article>;
           })}
         </div>}
         <footer className={done ? 'ready' : ''}><span>{done ? t('app.allDone') : t('app.pending', { count: pending })}</span><button disabled={!done} onClick={advanceDay}>{currentDay === 15 ? t('app.quit') : t('app.next')} →</button></footer>
+        </>}
       </aside>
     </div>
-    {feedback && <div className="modal-backdrop" role="dialog" aria-modal="true"><div className="feedback-modal"><div className="stamp">처리</div><p>{feedback}</p><button onClick={closeFeedback}>{t('actions.close')}</button></div></div>}
+    {feedback && createPortal(<div className="modal-backdrop" role="dialog" aria-modal="true"><div className="feedback-modal"><div className="stamp">처리</div><p>{feedback}</p><button autoFocus onClick={() => { closeFeedback(); setSelectedTask(null); }}>{t('actions.close')}</button></div></div>, document.body)}
   </main>;
 }
 
