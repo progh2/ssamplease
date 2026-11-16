@@ -1,0 +1,16 @@
+name: Feature
+description: 플레이 가능한 기능 단위
+title: "[Feature] "
+labels: [feature]
+body:
+  - type: textarea
+    id: goal
+    attributes: { label: 목표, description: 플레이어가 얻는 경험을 적어주세요. }
+    validations: { required: true }
+  - type: textarea
+    id: criteria
+    attributes: { label: 완료 조건, description: 검증 가능한 체크리스트를 적어주세요. }
+    validations: { required: true }
+  - type: textarea
+    id: data
+    attributes: { label: 콘텐츠/데이터 변경, description: 추가 또는 변경할 JSON·번역 키·에셋 }

@@ -1,0 +1,13 @@
+{
+  "class_first": { "period": 2, "classroom": "2-1" },
+  "class_question": { "period": 3, "classroom": "2-2" },
+  "class_followup": { "period": 4, "classroom": "2-3" },
+  "class_broadcast_day": { "period": 2, "classroom": "2-1" },
+  "class_homeroom": { "period": 3, "classroom": "2-3" },
+  "class_counseling_day": { "period": 4, "classroom": "2-2" },
+  "class_admin_day": { "period": 2, "classroom": "2-1" },
+  "supervise_day11": { "period": 1, "classroom": "2-3" },
+  "supervise_question": { "period": 2, "classroom": "2-4" },
+  "supervise_day13": { "period": 1, "classroom": "2-3" },
+  "class_final": { "period": 2, "classroom": "2-3" }
+}

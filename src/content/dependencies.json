@@ -1,0 +1,21 @@
+{
+  "notice_basic": ["message_welcome"],
+  "class_first": ["notice_basic"],
+  "equipment_check": ["message_broadcast"],
+  "cable_repair": ["message_admin"],
+  "edugreat_purchase": ["cable_repair"],
+  "attendance_basic": ["message_homeroom"],
+  "message_admin": ["equipment_check"],
+  "message_approval_return": ["edugreat_purchase"],
+  "approval_revision": ["message_approval_return"],
+  "message_approval_done": ["approval_revision"],
+  "message_budget_close": ["message_approval_done"],
+  "exam_pack": ["message_exam_schedule"],
+  "check_supervision": ["exam_pack"],
+  "supervise_day11": ["exam_count_day11"],
+  "omr_basic": ["supervise_day11"],
+  "supervise_question": ["message_room_change"],
+  "omr_day12": ["supervise_question"],
+  "omr_missing": ["supervise_day13"],
+  "exam_material_sort": ["omr_missing"]
+}

@@ -1,0 +1,5 @@
+[P0] GitHub Pages 배포와 배포 URL 검증|feature,P0|pages.md
+[P1] 한국어·영어 전체 문자열과 언어 전환 검증|content,P1|localization.md
+[P1] 타이틀·이어하기·저장 복구 사용자 흐름|feature,P1|save-flow.md
+[P1] DAY 1~15 업무 판단과 변칙 품질 개선|content,P1|content-quality.md
+[P1] 브라우저 회귀 테스트 CI와 추가 날짜 검증|quality,P1|browser-coverage.md

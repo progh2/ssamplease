@@ -1,0 +1,18 @@
+{
+  "ko": {
+    "office": "교무실", "enter": "{{period}}교시 · {{room}} 교실로 이동", "return": "교무실로 돌아가기",
+    "inClass": "{{period}}교시 · {{room}} 교실", "nextClass": "다음 수업: {{period}}교시 · {{room}}", "deskTime": "예정된 수업 완료 · 업무 정리",
+    "saveFailed": "저장을 확인할 수 없습니다. 새로고침하면 진행이 사라질 수 있습니다.",
+    "cost": "예상 금액 {{total}}원 / 예산 {{budget}}원", "overBudget": "예산을 초과했습니다. 수량을 줄여 다시 제출하세요.",
+    "draft": "작성 전", "submitted": "제출 완료 · 검토 대기", "revision": "보완 요청 · 비교 견적 필요", "resubmitted": "보완 제출 · 재검토 대기", "approved": "승인 완료", "closed": "검수 및 예산 집행 완료",
+    "revisionReason": "보완 사유: 가격 비교 근거가 빠졌습니다. 기존 기안에 비교 견적 자료를 첨부하세요.", "attach": "비교견적서.pdf 첨부", "attached": "비교견적서.pdf 첨부 완료"
+  },
+  "en": {
+    "office": "Staff room", "enter": "Period {{period}} · Go to classroom {{room}}", "return": "Return to staff room",
+    "inClass": "Period {{period}} · Classroom {{room}}", "nextClass": "Next lesson: period {{period}} · {{room}}", "deskTime": "Scheduled lessons finished · Desk work",
+    "saveFailed": "Saving could not be confirmed. Reloading may lose your progress.",
+    "cost": "Estimated cost ₩{{total}} / Budget ₩{{budget}}", "overBudget": "Over budget. Reduce the quantity and resubmit.",
+    "draft": "Not submitted", "submitted": "Submitted · Awaiting review", "revision": "Revision requested · Price comparison needed", "resubmitted": "Resubmitted · Awaiting review", "approved": "Approved", "closed": "Received and budget settled",
+    "revisionReason": "Revision: price comparison is missing. Attach it to your existing purchase request.", "attach": "Attach price-comparison.pdf", "attached": "Price comparison attached"
+  }
+}
