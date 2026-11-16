@@ -79,11 +79,11 @@ export function OfficialDocumentGame({ onDone }: ActivityProps) {
   </section>;
 }
 
-export function LessonGame({ onDone }: ActivityProps) {
+export function LessonGame({ onDone, taskId }: ActivityProps & { taskId: string }) {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
-  const [order, setOrder] = useState<string[]>([]);
-  const [stage, setStage] = useState<'sequence' | 'question' | 'check'>('sequence');
+  const [order, setOrder] = useDraftState<string[]>(taskId, 'order', [], v => v.length <= 3 && new Set(v).size === v.length && v.every(id => ['input', 'process', 'output'].includes(id)));
+  const [stage, setStage] = useDraftState<'sequence' | 'question' | 'check'>(taskId, 'stage', 'sequence', v => ['sequence', 'question', 'check'].includes(v));
   const [error, setError] = useState(false);
   const labels: Record<string, string> = en ? { input: 'Input', process: 'Process', output: 'Output' } : { input: '입력', process: '처리', output: '출력' };
   function checkOrder() {

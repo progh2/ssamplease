@@ -13,6 +13,10 @@ async function lesson(page: Page, title: string) {
   await open(page, title);
   for (const label of ['입력', '처리', '출력']) await page.getByRole('button', { name: label, exact: true }).click();
   await page.getByRole('button', { name: '순서 실행하기', exact: true }).click();
+  await page.reload();
+  await page.getByRole('button', { name: /교실로 이동/ }).click();
+  await open(page, title);
+  await expect(page.getByRole('heading', { name: '학생이 손을 들었습니다', exact: true })).toBeVisible();
   await page.getByRole('button', { name: '칠판에서 3 + 2를 단계별로 실행', exact: true }).click();
   await finish(page, '5');
 }
@@ -79,6 +83,8 @@ test('OMR missing ID is set aside and totals are checked', async ({ page }) => {
   await page.getByRole('button', { name: /할 일 보드/ }).click();
   await open(page, '학번 누락 OMR');
   await page.getByRole('button', { name: '기재 사항 일치', exact: true }).click();
+  await page.reload(); await open(page, '학번 누락 OMR');
+  await expect(page.getByRole('heading', { name: '확인 카드 2 / 3', exact: true })).toBeVisible();
   await page.getByRole('button', { name: '기재 사항 일치', exact: true }).click();
   await expect(page.getByRole('alert')).toBeVisible();
   await page.getByRole('button', { name: '확인 필요로 분리', exact: true }).click();
@@ -89,6 +95,24 @@ test('OMR missing ID is set aside and totals are checked', async ({ page }) => {
   await page.getByLabel('전체 회수 수량').fill('28');
   await finish(page, '기록 후 인계');
   await expect(page.getByRole('button', { name: '업무 시작 · 시험 자료 정리', exact: true })).toBeEnabled();
+});
+
+test('cable connections and packing selections survive reload', async ({ page }) => {
+  await seed(page, 5, { message_admin: 'completed' });
+  await open(page, '방송 장비 임시 복구');
+  await page.getByRole('button', { name: 'MIC', exact: true }).click();
+  await page.reload(); await open(page, '방송 장비 임시 복구');
+  await expect(page.getByRole('button', { name: 'MIC', exact: true })).toBeDisabled();
+  for (const name of ['MIXER', 'AMP']) await page.getByRole('button', { name, exact: true }).click();
+  await finish(page, 'SPEAKER');
+  await seed(page, 10, { message_exam_schedule: 'completed' });
+  await open(page, '시험 자료 정리·봉입');
+  await page.getByRole('button', { name: /정보 시험지 28부/ }).click();
+  await page.reload(); await open(page, '시험 자료 정리·봉입');
+  await expect(page.getByRole('button', { name: /정보 시험지 28부/ })).toHaveClass(/selected/);
+  await page.getByRole('button', { name: /답안지 28부/ }).click();
+  await page.getByRole('button', { name: /수량 확인표/ }).click();
+  await finish(page, '▣ 수량 확인 후 봉인');
 });
 
 test('official document requires writing and review', async ({ page }) => {

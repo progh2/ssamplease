@@ -4,6 +4,7 @@ import { PhoneGame, OfficialDocumentGame, LessonGame } from './components/School
 import { OmrGame } from './components/OmrGame';
 import { DeskObjects } from './components/DeskObjects';
 import { EquipmentCheck } from './components/EquipmentCheck';
+import { useDraftState } from './components/useDraftState';
 import { useTranslation } from 'react-i18next';
 import { days } from './content/days';
 import { OfficeScene } from './OfficeScene';
@@ -74,11 +75,11 @@ export function App() {
               <p className="workspace-brief">{t(task.descriptionKey)}</p>
               <div className="workspace-body">
               <fieldset disabled={locked || needsRoom} style={{ border: 0, padding: 0, margin: 0 }}>
-              {task.kind === 'class' && <LessonGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.kind === 'class' && <LessonGame taskId={task.id} onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'phone_guardian' && <PhoneGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'official_document' && <OfficialDocumentGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'equipment_check' && <EquipmentCheck onDone={() => completeTask(task.id, 'completed', t('feedback.equipmentFound'))} />}
-              {task.id.startsWith('omr_') && <OmrGame missing={task.id === 'omr_missing'} onDone={() => completeTask(task.id, task.choices[0].outcome, t(task.choices[0].feedbackKey))} />}
+              {task.id.startsWith('omr_') && <OmrGame taskId={task.id} missing={task.id === 'omr_missing'} onDone={() => completeTask(task.id, task.choices[0].outcome, t(task.choices[0].feedbackKey))} />}
               {!isDone && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
               {!isDone && task.id === 'cable_repair' && <CableRepair onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
               {!isDone && task.id === 'edugreat_purchase' && <ApprovalForm onDone={() => completeTask(task.id, 'completed', t('feedback.submitted'))} />}
@@ -103,7 +104,7 @@ function CableRepair({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation();
   const expected = ['mic', 'mixer', 'amp', 'speaker'];
   const labels: Record<string, string> = { mic: 'MIC', mixer: 'MIXER', amp: 'AMP', speaker: 'SPEAKER' };
-  const [chain, setChain] = useState<string[]>([]);
+  const [chain, setChain] = useDraftState<string[]>('cable_repair', 'chain', [], v => v.length <= 4 && new Set(v).size === v.length && v.every(id => ['mic', 'mixer', 'amp', 'speaker'].includes(id)));
   const [wrong, setWrong] = useState(false);
   const select = (part: string) => {
     if (chain.includes(part)) return;
@@ -151,7 +152,7 @@ function ExamPack({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation();
   const required = ['paper', 'answers', 'checklist'];
   const all = [...required, 'wrongGrade', 'memo'];
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useDraftState<string[]>('exam_pack', 'selected', [], v => new Set(v).size === v.length && v.every(id => ['paper', 'answers', 'checklist', 'wrongGrade', 'memo'].includes(id)));
   const [warning, setWarning] = useState(false);
   const toggle = (item: string) => setSelected((current) => current.includes(item) ? current.filter((value) => value !== item) : [...current, item]);
   const seal = () => {

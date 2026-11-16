@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDraftState } from './useDraftState';
 
-export function OmrGame({ missing, onDone }: { missing: boolean; onDone: () => void }) {
+export function OmrGame({ missing, onDone, taskId }: { missing: boolean; onDone: () => void; taskId: string }) {
   const en = useTranslation().i18n.language.startsWith('en');
-  const [index, setIndex] = useState(0);
-  const [count, setCount] = useState('');
+  const [index, setIndex] = useDraftState<number>(taskId, 'index', 0, n => Number.isInteger(n) && n >= 0 && n <= 3);
+  const [count, setCount] = useDraftState<string>(taskId, 'count', '');
   const [error, setError] = useState(false);
   const cards = [
     { name: '김하늘', id: '2301', printed: '2301' },
