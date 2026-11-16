@@ -16,17 +16,13 @@ class Office extends Phaser.Scene {
       }
       return;
     }
-    g.fillStyle(0x8d6850).fillRect(0, height * .58, width, height * .42);
-    g.fillStyle(0xf0dfb7).fillRect(0, 0, width, height * .58);
-    g.fillStyle(0x67504a).fillRect(width * .06, height * .16, width * .25, height * .3);
-    g.fillStyle(0x9fc5b5).fillRect(width * .075, height * .18, width * .22, height * .23);
-    g.fillStyle(0x654536).fillRect(width * .5, height * .51, width * .44, height * .27);
-    g.fillStyle(0xb17a4f).fillRect(width * .48, height * .49, width * .48, height * .08);
-    g.fillStyle(0x34363a).fillRect(width * .6, height * .28, width * .22, height * .2);
-    g.fillStyle(0xa7d5d2).fillRect(width * .62, height * .3, width * .18, height * .15);
-    g.fillStyle(0xe8dfce).fillRect(width * .52, height * .54, width * .18, height * .12);
-    g.lineStyle(3, 0xcb4b45).strokeRect(width * .52, height * .54, width * .18, height * .12);
-    this.add.text(width * .63, height * .37, 'HOT\nMESSENGER', { fontFamily: 'monospace', fontSize: Math.max(10, width / 50), color: '#294846', align: 'center' }).setOrigin(.5);
+    // A stable tabletop under independent interactive objects; room art comes later.
+    g.fillStyle(0xb88d60).fillRect(0, 0, width, height);
+    for (let row = 0; row < 8; row++) {
+      g.fillStyle(row % 2 ? 0xb48a5d : 0xbd9468).fillRect(0, row * 78, width, 76);
+      g.lineStyle(1, 0xa77d52, .5).lineBetween(0, row * 78 + 38, width, row * 78 + 38);
+    }
+    g.fillStyle(0x805b3e).fillRect(0, height - 20, width, 20);
   }
 }
 

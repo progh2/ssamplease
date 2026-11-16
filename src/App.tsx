@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { PhoneGame, OfficialDocumentGame, LessonGame } from './components/SchoolActivities';
 import { OmrGame } from './components/OmrGame';
+import { DeskObjects } from './components/DeskObjects';
+import { EquipmentCheck } from './components/EquipmentCheck';
 import { useTranslation } from 'react-i18next';
 import { days } from './content/days';
 import { OfficeScene } from './OfficeScene';
@@ -47,7 +49,7 @@ export function App() {
     {saveFailed && <p role="alert" className="save-warning">{t('flow.saveFailed')}</p>}
     <section className="story-strip"><div className="day-badge">{String(currentDay).padStart(2, '0')}</div><div><strong>{t('app.day', { day: currentDay })} — {t(day.titleKey)}</strong><p>{t(day.introKey)}</p></div><span className="accuracy">ACC {accuracy}%</span></section>
     <div className="game-grid">
-      <section className="scene-panel"><OfficeScene key={activeScheduledId ?? 'office'} classroom={activeScheduledId ? timetable[activeScheduledId].classroom : undefined} /><div className="scene-label">{activeScheduledId ? `${timetable[activeScheduledId].period} · ${timetable[activeScheduledId].classroom}` : t('flow.office')}</div></section>
+      <section className="scene-panel"><OfficeScene key={activeScheduledId ?? 'office'} classroom={activeScheduledId ? timetable[activeScheduledId].classroom : undefined} />{!activeScheduledId && <DeskObjects onOpen={id => { setBoardOpen(true); setView('desk'); setSelectedTask(id); }} />}<div className="scene-label">{activeScheduledId ? `${timetable[activeScheduledId].period} · ${timetable[activeScheduledId].classroom}` : t('flow.office')}</div></section>
       <aside className={`work-panel ${boardOpen ? '' : 'board-collapsed'}`}>
         <button className="board-toggle" onClick={() => setBoardOpen(!boardOpen)}>{en ? 'Task board' : '할 일 보드'} {boardOpen ? '−' : '+'}</button>
         {boardOpen && <>
@@ -75,6 +77,7 @@ export function App() {
               {task.kind === 'class' && <LessonGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'phone_guardian' && <PhoneGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'official_document' && <OfficialDocumentGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.id === 'equipment_check' && <EquipmentCheck onDone={() => completeTask(task.id, 'completed', t('feedback.equipmentFound'))} />}
               {task.id.startsWith('omr_') && <OmrGame missing={task.id === 'omr_missing'} onDone={() => completeTask(task.id, task.choices[0].outcome, t(task.choices[0].feedbackKey))} />}
               {!isDone && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
               {!isDone && task.id === 'cable_repair' && <CableRepair onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
@@ -82,7 +85,7 @@ export function App() {
               {!isDone && task.id === 'approval_revision' && <RevisionForm onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}
               {!isDone && task.kind === 'attendance' && <AttendanceSheet unknown={task.id === 'attendance_unknown'} followup={task.id === 'attendance_followup'} onDone={() => completeTask(task.id, task.id === 'attendance_unknown' ? 'resolved_with_issue' : 'completed', t(task.choices[0].feedbackKey))} />}
               {!isDone && task.id === 'exam_pack' && <ExamPack onDone={() => completeTask(task.id, 'completed', t('feedback.examPacked'))} />}
-              {!isDone && !task.id.startsWith('omr_') && !exerciseIds.includes(task.id) && !['cable_repair', 'edugreat_purchase', 'approval_revision', 'exam_pack', 'phone_guardian', 'official_document'].includes(task.id) && task.kind !== 'attendance' && task.kind !== 'class' && <div className="choices">{task.choices.map((choice, index) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey), task.id === 'grading_partial' && index === 1)}>{t(choice.labelKey)}</button>)}</div>}
+              {!isDone && !task.id.startsWith('omr_') && !exerciseIds.includes(task.id) && !['equipment_check', 'cable_repair', 'edugreat_purchase', 'approval_revision', 'exam_pack', 'phone_guardian', 'official_document'].includes(task.id) && task.kind !== 'attendance' && task.kind !== 'class' && <div className="choices">{task.choices.map((choice, index) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey), task.id === 'grading_partial' && index === 1)}>{t(choice.labelKey)}</button>)}</div>}
               </fieldset>
               </div></section>, document.body)}
             </article>;

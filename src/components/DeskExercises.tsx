@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDraftState } from './useDraftState';
 import { useTranslation } from 'react-i18next';
 import exercises from '../content/exercises.json';
 
@@ -12,7 +13,7 @@ export function DeskExercise({ taskId, onDone }: { taskId: string; onDone: Done 
 function Documents({ taskId, onDone }: { taskId: 'notice_basic' | 'notice_variant'; onDone: Done }) {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useDraftState<number>(taskId, 'index', 0, n => Number.isInteger(n) && n >= 0 && n < exercises[taskId].length);
   const [error, setError] = useState(false);
   const documents = exercises[taskId];
   const doc = documents[index];
@@ -36,7 +37,7 @@ function Grading({ taskId, onDone }: { taskId: 'grading_basic' | 'grading_partia
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
   const data = exercises[taskId];
-  const [score, setScore] = useState('');
+  const [score, setScore] = useDraftState<string>(taskId, 'score', '');
   const [error, setError] = useState(false);
   function submit() {
     if (score === '' || Number(score) !== data.expected) { setError(true); return; }

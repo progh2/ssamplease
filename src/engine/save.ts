@@ -1,4 +1,5 @@
 import { days } from '../content/days';
+import { sanitizeDrafts } from './drafts';
 import type { TaskStatus } from '../types';
 import type { StateStorage } from 'zustand/middleware';
 
@@ -83,5 +84,6 @@ export function recoverSave(value: unknown) {
   }
   const quantity = typeof data.purchaseQuantity === 'number' && [1, 2, 3].includes(data.purchaseQuantity) ? data.purchaseQuantity : 2;
   const comparisonAttached = currentDay >= 7 && data.comparisonAttached === true;
-  return { currentDay, taskStatuses, accuracy, history, purchaseQuantity: quantity, comparisonAttached };
+  const drafts = sanitizeDrafts(data.drafts, Object.keys(taskStatuses).filter(id => taskStatuses[id] === 'available'));
+  return { currentDay, taskStatuses, accuracy, history, purchaseQuantity: quantity, comparisonAttached, drafts };
 }

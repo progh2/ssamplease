@@ -73,3 +73,16 @@ fieldset:disabled { opacity: .65; }
 .sequence-slots { display: flex; gap: 16px; list-style-position: inside; padding: 0; }
 .sequence-slots li { flex: 1; padding: 24px 10px; border: 2px dashed #c5d4ad; text-align: center; }
 @media(max-width:700px) { .activity-columns { grid-template-columns: 1fr; } .lesson-board { padding: 16px; } .sequence-slots { gap: 6px; } }
+.desk-objects { position: absolute; inset: 0; }
+.desk-object { position: absolute; width: 25%; height: 28%; border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; color: #241d18; }
+.desk-object svg { width: 100%; height: 65%; filter: drop-shadow(4px 6px 0 #392b2440); }
+.desk-object span { background: #f7ead0e8; padding: 3px 8px; font-weight: bold; border-radius: 3px; }
+.desk-object i { font-size: .7rem; background: #35564a; color: #fff; padding: 2px 6px; font-style: normal; }
+.desk-object:disabled { opacity: .85; }
+.desk-object:not(:disabled):hover svg { filter: drop-shadow(0 0 4px #fff3b3); }
+.object-computer { left: 8%; top: 8%; }
+.object-papers { left: 8%; top: 47%; }
+.object-pen { left: 37%; top: 47%; }
+.object-audio { left: 67%; top: 47%; }
+.object-register { left: 37%; top: 8%; }
+.object-phone { left: 67%; top: 8%; }

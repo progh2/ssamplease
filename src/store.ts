@@ -6,10 +6,13 @@ import { createSafeStorage, recoverSave, statusesForDay } from './engine/save';
 import { canLeaveSchool, canStartTask, isTaskResolved } from './engine/taskEngine';
 import { nextLesson, timetable } from './engine/schedule';
 import { purchaseBudget, unitPrice } from './engine/workflow';
+import type { Drafts, DraftValue } from './engine/drafts';
 
 export const useSaveHealth = create<{ failed: boolean }>(() => ({ failed: false }));
 
 interface GameStore {
+  drafts: Drafts;
+  setDraft: (id: string, field: string, value: DraftValue) => void;
   currentDay: number;
   taskStatuses: Record<string, TaskStatus>;
   feedback: string | null;
@@ -29,6 +32,11 @@ interface GameStore {
 }
 
 export const useGameStore = create<GameStore>()(persist((set) => ({
+  drafts: {},
+  setDraft: (id, field, value) => set(state => {
+    if (!days.find(day => day.day === state.currentDay)?.tasks.some(task => task.id === id) || isTaskResolved(state.taskStatuses[id])) return state;
+    return { drafts: { ...state.drafts, [id]: { ...state.drafts[id], [field]: value } } };
+  }),
   currentDay: 1,
   taskStatuses: statusesForDay(1),
   feedback: null,
@@ -60,11 +68,11 @@ export const useGameStore = create<GameStore>()(persist((set) => ({
     const day = days.find((entry) => entry.day === state.currentDay);
     if (!day || !canLeaveSchool(day.tasks, state.taskStatuses)) return state;
     const next = state.currentDay + 1;
-    return { currentDay: next, taskStatuses: statusesForDay(next), feedback: null, activeScheduledId: null };
+    return { currentDay: next, taskStatuses: statusesForDay(next), feedback: null, activeScheduledId: null, drafts: {} };
   }),
-  reset: () => set({ currentDay: 1, taskStatuses: statusesForDay(1), feedback: null, accuracy: 100, history: {}, purchaseQuantity: 2, activeScheduledId: null, comparisonAttached: false }),
+  reset: () => set({ currentDay: 1, taskStatuses: statusesForDay(1), feedback: null, accuracy: 100, history: {}, purchaseQuantity: 2, activeScheduledId: null, comparisonAttached: false, drafts: {} }),
 }), { name: 'teachers-please-save-v1', version: 7,
   storage: createJSONStorage(() => createSafeStorage(() => localStorage, () => useSaveHealth.setState({ failed: true }))),
   migrate: (saved) => recoverSave(saved),
   merge: (saved, current) => ({ ...current, ...recoverSave(saved) }),
-  partialize: (state) => ({ currentDay: state.currentDay, taskStatuses: state.taskStatuses, accuracy: state.accuracy, history: state.history, purchaseQuantity: state.purchaseQuantity, comparisonAttached: state.comparisonAttached }) }));
+  partialize: (state) => ({ currentDay: state.currentDay, taskStatuses: state.taskStatuses, accuracy: state.accuracy, history: state.history, purchaseQuantity: state.purchaseQuantity, comparisonAttached: state.comparisonAttached, drafts: state.drafts }) }));

@@ -62,6 +62,9 @@ test('phone records unanswered call before attendance unlocks', async ({ page })
   await page.getByLabel('연락처 선택').selectOption('guardian');
   await page.getByRole('button', { name: '전화 걸기', exact: true }).click();
   await page.getByLabel('연락 목적').selectOption('absence');
+  await page.reload();
+  await open(page, '보호자 전화 연락');
+  await expect(page.getByLabel('연락 목적')).toHaveValue('absence');
   await page.getByLabel('처리 결과').selectOption('pending');
   await finish(page, '연락 기록 저장');
   await page.reload();
@@ -96,11 +99,31 @@ test('official document requires writing and review', async ({ page }) => {
   await page.getByLabel('요청 금액 (원)').fill('30000');
   await page.getByLabel('장비점검표.pdf 첨부', { exact: true }).check();
   await page.getByRole('button', { name: '공문 미리보기', exact: true }).click();
+  await page.reload();
+  await open(page, '방송 장비 구매 공문 작성');
+  await expect(page.locator('.document-preview')).toContainText('방송실 케이블 구매 요청');
   await page.getByRole('button', { name: '검토 후 결재 요청', exact: true }).click();
   await expect(page.getByRole('alert')).toBeVisible();
   for (const checkbox of await page.getByRole('checkbox').all()) await checkbox.check();
   await finish(page, '검토 후 결재 요청');
   await expect(page.locator('.task-card.done')).toContainText('방송 장비 구매 공문 작성');
+});
+
+test('desk objects unlock and equipment inspection uses every test', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.object-papers')).toHaveCount(0);
+  await page.getByRole('button', { name: /할 일 보드/ }).click();
+  await page.getByRole('button', { name: '컴퓨터 · 업무 열기', exact: true }).click();
+  await finish(page, '메시지 읽기');
+  await expect(page.getByRole('button', { name: '서류와 도장 · 업무 열기', exact: true })).toBeVisible();
+  await seed(page, 4, { message_broadcast: 'completed' });
+  await page.getByRole('button', { name: '방송 장비 · 업무 열기', exact: true }).click();
+  await page.getByRole('button', { name: '점검 결과 기록', exact: true }).click();
+  await expect(page.getByRole('alert')).toBeVisible();
+  for (const name of ['마이크', '믹서', '연결 케이블', '스피커']) await page.getByRole('button', { name, exact: true }).click();
+  await page.getByLabel('고장 부위').selectOption('cable');
+  await finish(page, '점검 결과 기록');
+  await expect(page.getByRole('button', { name: '방송 장비 · 대기 업무 없음', exact: true })).toBeDisabled();
 });
 
 test('budget correction and malformed save recovery', async ({ page }) => {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDraftState } from './useDraftState';
 import { useTranslation } from 'react-i18next';
 
 type ActivityProps = {
@@ -8,10 +9,10 @@ type ActivityProps = {
 export function PhoneGame({ onDone }: ActivityProps) {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
-  const [contact, setContact] = useState('');
-  const [called, setCalled] = useState(false);
-  const [purpose, setPurpose] = useState('');
-  const [result, setResult] = useState('');
+  const [contact, setContact] = useDraftState<string>('phone_guardian', 'contact', '');
+  const [called, setCalled] = useDraftState<boolean>('phone_guardian', 'called', false);
+  const [purpose, setPurpose] = useDraftState<string>('phone_guardian', 'purpose', '');
+  const [result, setResult] = useDraftState<string>('phone_guardian', 'result', '');
   const [error, setError] = useState('');
   const call = () => {
     if (contact !== 'guardian') {
@@ -49,12 +50,12 @@ export function PhoneGame({ onDone }: ActivityProps) {
 export function OfficialDocumentGame({ onDone }: ActivityProps) {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
-  const [title, setTitle] = useState('');
-  const [recipient, setRecipient] = useState('');
-  const [amount, setAmount] = useState('');
-  const [attachment, setAttachment] = useState(false);
-  const [preview, setPreview] = useState(false);
-  const [checks, setChecks] = useState<string[]>([]);
+  const [title, setTitle] = useDraftState<string>('official_document', 'title', '');
+  const [recipient, setRecipient] = useDraftState<string>('official_document', 'recipient', '');
+  const [amount, setAmount] = useDraftState<string>('official_document', 'amount', '');
+  const [attachment, setAttachment] = useDraftState<boolean>('official_document', 'attachment', false);
+  const [preview, setPreview] = useDraftState<boolean>('official_document', 'preview', false);
+  const [checks, setChecks] = useDraftState<string[]>('official_document', 'checks', [], v => v.every(x => ['0', '1', '2'].includes(x)) && new Set(v).size === v.length);
   const [error, setError] = useState(false);
   const valid = title.trim().length >= 5 && recipient === 'admin' && amount.trim() !== '' && Number(amount) === 30000 && attachment;
   const reviewItems = en ? ['Recipient and title', '2 × ₩15,000 = ₩30,000', 'Equipment inspection attached'] : ['수신처와 제목 대조', '2개 × 15,000원 = 30,000원 확인', '장비점검표 첨부 확인'];
