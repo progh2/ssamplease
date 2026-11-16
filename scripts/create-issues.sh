@@ -30,10 +30,10 @@ cleanup() { rm -f -- "$task_tmp/titles.json" "$task_tmp/labels.json"; rmdir -- "
 trap cleanup EXIT
 
 # Include closed issues and all pages so rerunning does not recreate completed work.
-gh api --paginate --slurp "repos/$repo/issues?state=all&per_page=100" \
-  --jq '[.[][] | select(.pull_request == null) | .title]' > "$task_tmp/titles.json"
-gh api --paginate --slurp "repos/$repo/labels?per_page=100" \
-  --jq '[.[][] | .name]' > "$task_tmp/labels.json"
+gh api --paginate --slurp "repos/$repo/issues?state=all&per_page=100" |
+  node -e 'const fs = require("fs"); const pages = JSON.parse(fs.readFileSync(0, "utf8")); process.stdout.write(JSON.stringify(pages.flat().filter(item => !item.pull_request).map(item => item.title)))' > "$task_tmp/titles.json"
+gh api --paginate --slurp "repos/$repo/labels?per_page=100" |
+  node -e 'const fs = require("fs"); const pages = JSON.parse(fs.readFileSync(0, "utf8")); process.stdout.write(JSON.stringify(pages.flat().map(item => item.name)))' > "$task_tmp/labels.json"
 contains() {
   node -e 'const fs = require("fs"); process.exit(JSON.parse(fs.readFileSync(process.argv[1], "utf8")).includes(process.argv[2]) ? 0 : 1)' "$1" "$2"
 }
