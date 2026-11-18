@@ -70,6 +70,10 @@ fieldset:disabled { opacity: .65; }
 .document-preview { border: 1px solid #ddd; padding: 24px; min-height: 260px; line-height: 1.9; }
 .lesson-board { background: #234d40; padding: 32px; color: #fff7e4; border: 10px solid #98734e; }
 .lesson-board [role=alert] { color: #ffcca5; }
+.office-canvas canvas { display: block; }
+.task-workspace.workspace-class { background: #d4bb96 url('./assets/backgrounds/classroom.png') center / cover fixed; }
+.workspace-class > header, .workspace-class .workspace-brief { background: #fff9ecef; padding: 16px 24px; border-radius: 4px; }
+.workspace-class .workspace-body { background: #fff9eceb; }
 .sequence-slots { display: flex; gap: 16px; list-style-position: inside; padding: 0; }
 .sequence-slots li { flex: 1; padding: 24px 10px; border: 2px dashed #c5d4ad; text-align: center; }
 @media(max-width:700px) { .activity-columns { grid-template-columns: 1fr; } .lesson-board { padding: 16px; } .sequence-slots { gap: 6px; } }
