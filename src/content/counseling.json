@@ -1,0 +1,13 @@
+{
+  "opening": {"ko":"선생님, 방송이 끊긴 게 제가 만져서 그런 것 같아요. 다음 방송은 빠지면 안 될까요?", "en":"I think the broadcast failed because I touched the equipment. Could I sit out the next one?"},
+  "clues": [
+    {"id":"student", "label":{"ko":"하늘의 이야기 듣기","en":"Listen to Haneul"}, "text":{"ko":"리허설에서는 괜찮았는데 본방송 때 소리가 끊겼어요. 친구들이 저를 보고 있어서, 제가 망친 것 같았어요.","en":"Rehearsal sounded fine, but the audio dropped during the broadcast. Everyone looked at me. I felt I had ruined it."}},
+    {"id":"inspection", "label":{"ko":"장비 점검 기록 대조","en":"Compare inspection record"}, "text":{"ko":"점검 기록: 케이블 단자를 움직일 때만 신호가 끊김. 예비 케이블에서는 정상. 학생 조작 실수의 근거는 없음.","en":"Inspection: moving the connector cuts the signal. A spare cable works. There is no evidence of student error."}},
+    {"id":"wish", "label":{"ko":"다음 방송에 대한 마음 묻기","en":"Ask about the next broadcast"}, "text":{"ko":"방송은 계속하고 싶어요. 그런데 처음부터 혼자 장비를 맡기는 건 아직 무서워요.","en":"I want to keep broadcasting. But running the equipment alone still feels scary."}}
+  ],
+  "plans": [
+    {"id":"rehearsal", "label":{"ko":"함께 리허설하고 역할을 나누기","en":"Rehearse together and share roles"}, "reply":{"ko":"그럼 첫 점검은 같이 해 주실래요? 방송 멘트는 제가 준비해 볼게요.","en":"Could we do the first sound check together? I can prepare the announcements."}, "followup":{"ko":"약속한 리허설에서 선생님은 신호를, 저는 멘트를 맡았잖아요. 오늘은 제가 먼저 점검표를 꺼냈어요!","en":"At our rehearsal you checked the signal while I practiced the script. Today I pulled out the checklist myself!"}},
+    {"id":"buddy", "label":{"ko":"동료 학생과 점검표를 함께 쓰기","en":"Use a checklist with a club partner"}, "reply":{"ko":"지우랑 같이 해 보면 덜 긴장할 것 같아요. 제가 확인한 항목은 제가 표시할게요.","en":"I think I would feel calmer working with Jiwoo. I will mark the checks I do myself."}, "followup":{"ko":"지우랑 번갈아 점검표를 읽었어요. 서로 확인해 주니까 방송 전에 마음이 놓였어요.","en":"Jiwoo and I took turns reading the checklist. Checking each other helped us feel ready."}},
+    {"id":"pause", "label":{"ko":"한 번 쉬고 복귀 날짜 함께 정하기","en":"Take one broadcast off and agree a return"}, "reply":{"ko":"한 번만 쉬고 다음 리허설엔 올게요. 그때 다시 이야기해도 되죠?","en":"I will take this one off and come to the next rehearsal. Could we talk again then?"}, "followup":{"ko":"한 번 쉬어도 괜찮다고 해 주셔서 고마웠어요. 약속한 리허설에 돌아와서 오늘 방송을 같이 마쳤어요.","en":"Thank you for letting me take a break. I came back for our rehearsal and helped finish today's broadcast."}}
+  ]
+}

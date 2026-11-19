@@ -1,13 +1,12 @@
 {
   "notice_basic": [
-    { "id": "2101", "name": "김하늘", "submittedId": "2101", "signed": true, "consent": true },
-    { "id": "2102", "name": "박지우", "submittedId": "2102", "signed": true, "consent": true },
-    { "id": "2103", "name": "서민준", "submittedId": "2103", "signed": true, "consent": true }
+    { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "submittedId": "2301", "signed": true, "consent": "yes", "note": "방송반 체험 신청도 같이 내면 되나요?", "noteEn": "Can I hand in my broadcasting club application too?" },
+    { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "submittedId": "2302", "signed": true, "consent": "no", "note": "이번에는 사진 공개에 동의하지 않으셨대요.", "noteEn": "My guardian chose not to allow photo publication this time." },
+    { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "submittedId": "2303", "signed": true, "consent": "yes", "note": "선생님, 이름이 작은 글씨여도 읽히죠?", "noteEn": "My handwriting is small, but can you read my name?" }
   ],
   "notice_variant": [
-    { "id": "2101", "name": "김하늘", "submittedId": "2101", "signed": false, "consent": true },
-    { "id": "2102", "name": "박지우", "submittedId": "2109", "signed": true, "consent": true }
-  ],
-  "grading_basic": { "answer": "순서대로 실행한다.", "answerEn": "Execute in order.", "rubric": "알고리즘의 순차 실행을 설명하면 3점, 그 외 0점.", "rubricEn": "3 points for explaining sequential execution; otherwise 0.", "expected": 3, "max": 3 },
-  "grading_partial": { "answer": "합계를 0으로 정하고 1~3을 더한다. 최종 결과: 5", "answerEn": "Start at zero and add 1 through 3. Final result: 5.", "rubric": "합산 과정 2점 + 최종 결과 6이면 1점. 과정이 맞으면 부분점수를 준다.", "rubricEn": "2 points for the addition process + 1 for the final result 6. Award process credit independently.", "expected": 2, "max": 3 }
+    { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "submittedId": "2301", "signed": false, "consent": "yes", "note": "아침에 급하게 챙기느라… 빠뜨린 게 있나요?", "noteEn": "I grabbed it in a hurry this morning… is something missing?" },
+    { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "submittedId": "2309", "signed": true, "consent": "yes", "note": "작년 학번이랑 헷갈렸을지도 몰라요.", "noteEn": "I may have mixed up my student number with last year's." },
+    { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "submittedId": "2303", "signed": true, "consent": "no", "note": "동의하지 않음에 표시했는데 다시 써야 하나요?", "noteEn": "We marked 'do not consent'. Do I need to fill it out again?" }
+  ]
 }

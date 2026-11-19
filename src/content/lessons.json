@@ -1,0 +1,586 @@
+[
+  {
+    "id": "class_first",
+    "mode": "sequence",
+    "title": {
+      "ko": "급식 줄도 알고리즘일까?",
+      "en": "Is the lunch queue an algorithm?"
+    },
+    "context": {
+      "ko": "첫 수업. 지우는 “순서를 왜 배워요?”라고 묻습니다. 두 수를 더하는 계산기를 함께 만들어 설명해 보세요.",
+      "en": "On your first day, Jiwoo asks why order matters. Build a two-number calculator together."
+    },
+    "cards": [
+      {
+        "id": "input",
+        "ko": "입력",
+        "en": "Input"
+      },
+      {
+        "id": "process",
+        "ko": "처리",
+        "en": "Process"
+      },
+      {
+        "id": "output",
+        "ko": "출력",
+        "en": "Output"
+      }
+    ],
+    "correctOrder": [
+      "input",
+      "process",
+      "output"
+    ],
+    "cases": [
+      {
+        "input": "3, 2",
+        "expected": "5"
+      },
+      {
+        "input": "0, 4",
+        "expected": "4"
+      }
+    ],
+    "question": {
+      "ko": "지우: “0을 입력해도 입력 단계는 필요한 거네요?”",
+      "en": "Jiwoo: “Even if the number is zero, we still need the input step?”"
+    },
+    "exitOptions": [
+      {
+        "id": "zero",
+        "ko": "0도 값이다. 0 + 4의 출력은 4",
+        "en": "Zero is a value. The output of 0 + 4 is 4",
+        "correct": true
+      },
+      {
+        "id": "skip",
+        "ko": "0은 없다는 뜻이니 입력을 생략한다",
+        "en": "Zero means nothing, so skip input",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "입력은 값을 받고, 처리는 더하고, 출력은 결과를 보여줍니다. 결과를 만들기 전에 보여줄 수는 없습니다.",
+      "en": "Input receives values, processing adds them, and output displays the result. A result must exist before it can be shown."
+    }
+  },
+  {
+    "id": "class_question",
+    "mode": "rule",
+    "title": {
+      "ko": "점심 방송은 언제 켤까?",
+      "en": "When should the lunch broadcast start?"
+    },
+    "context": {
+      "ko": "하늘이 방송반 이야기를 꺼냅니다. “12시부터 방송인데, 12시 정각에는 안 켜져요.” 경계값을 시험해 원인을 찾아보세요.",
+      "en": "Haneul from the broadcast club says the noon program starts late. Test the boundary values to find out why."
+    },
+    "options": [
+      {
+        "id": "gt",
+        "ko": "시각 > 12이면 방송",
+        "en": "Broadcast if hour > 12",
+        "outputs": [
+          "대기|Wait",
+          "대기|Wait",
+          "방송|On"
+        ]
+      },
+      {
+        "id": "gte",
+        "ko": "시각 ≥ 12이면 방송",
+        "en": "Broadcast if hour ≥ 12",
+        "outputs": [
+          "대기|Wait",
+          "방송|On",
+          "방송|On"
+        ]
+      },
+      {
+        "id": "eq",
+        "ko": "시각 = 12이면 방송",
+        "en": "Broadcast if hour = 12",
+        "outputs": [
+          "대기|Wait",
+          "방송|On",
+          "대기|Wait"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "input": "11",
+        "expected": "대기|Wait"
+      },
+      {
+        "input": "12",
+        "expected": "방송|On"
+      },
+      {
+        "input": "13",
+        "expected": "방송|On"
+      }
+    ],
+    "question": {
+      "ko": "하늘: “내일은 13시부터라면 어디를 바꾸죠?”",
+      "en": "Haneul: “What changes if tomorrow’s broadcast starts at 13?”"
+    },
+    "exitOptions": [
+      {
+        "id": "boundary",
+        "ko": "≥는 유지하고 기준 시각을 13으로 바꾼다",
+        "en": "Keep ≥ and change the threshold to 13",
+        "correct": true
+      },
+      {
+        "id": "strict",
+        "ko": ">로 바꾸고 기준 시각은 12로 둔다",
+        "en": "Use > and leave the threshold at 12",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "규칙은 “12시부터 계속”입니다. 정각과 그 이후를 모두 포함해야 합니다. 실제 시각은 소수도 있으므로 > 12와 ≥ 13은 다릅니다.",
+      "en": "The rule means from 12 onward, including exactly 12. Real time can include fractions, so > 12 is not the same as ≥ 13."
+    }
+  },
+  {
+    "id": "class_followup",
+    "mode": "rule",
+    "title": {
+      "ko": "반복문에서 사라진 한 번",
+      "en": "The missing repetition"
+    },
+    "context": {
+      "ko": "어제 채점에서 과정은 맞고 결과만 다른 답안이 나왔습니다. 민준의 반복문을 실행하며 어느 조건이 한 번을 빠뜨리는지 보여주세요.",
+      "en": "A script used the right method but produced the wrong total. Trace Minjun’s loop and find the missing repetition."
+    },
+    "options": [
+      {
+        "id": "short",
+        "ko": "i = 1부터 i < n 동안 1씩 더하기",
+        "en": "Start i = 1; add 1 while i < n",
+        "outputs": [
+          "0",
+          "2",
+          "4"
+        ]
+      },
+      {
+        "id": "correct",
+        "ko": "i = 1부터 i ≤ n 동안 1씩 더하기",
+        "en": "Start i = 1; add 1 while i ≤ n",
+        "outputs": [
+          "1",
+          "3",
+          "5"
+        ]
+      },
+      {
+        "id": "extra",
+        "ko": "i = 0부터 i ≤ n 동안 1씩 더하기",
+        "en": "Start i = 0; add 1 while i ≤ n",
+        "outputs": [
+          "2",
+          "4",
+          "6"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "input": "n = 1",
+        "expected": "1"
+      },
+      {
+        "input": "n = 3",
+        "expected": "3"
+      },
+      {
+        "input": "n = 5",
+        "expected": "5"
+      }
+    ],
+    "question": {
+      "ko": "민준: “n이 1일 때도 검사한 이유가 뭐예요?”",
+      "en": "Minjun: “Why did we also test n = 1?”"
+    },
+    "exitOptions": [
+      {
+        "id": "edge",
+        "ko": "가장 작은 입력에서 반복이 빠지는지 확인하려고",
+        "en": "To see whether the smallest input skips the loop",
+        "correct": true
+      },
+      {
+        "id": "easy",
+        "ko": "계산하기 쉬워서이며 다른 값은 시험할 필요 없다",
+        "en": "It is easy to calculate; other tests are unnecessary",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "n번 세려면 1부터 n까지 모두 포함해야 합니다. 0부터 시작하면 한 번 많아집니다.",
+      "en": "To count n times, include every number from 1 through n. Starting at zero adds one extra repetition."
+    }
+  },
+  {
+    "id": "class_broadcast_day",
+    "mode": "sequence",
+    "title": {
+      "ko": "방송 신호의 여행",
+      "en": "Follow the broadcast signal"
+    },
+    "context": {
+      "ko": "방송반 점검 전, 소리가 지나가는 순서를 학생들과 모델링합니다. 이 수업이 끝나면 실제 장비를 확인할 차례입니다.",
+      "en": "Before inspecting the broadcast room, model the signal path with the class. The real equipment check comes next."
+    },
+    "cards": [
+      {
+        "id": "microphone",
+        "ko": "마이크에서 소리 입력",
+        "en": "Microphone receives sound"
+      },
+      {
+        "id": "mixer",
+        "ko": "믹서에서 음량 조절",
+        "en": "Mixer adjusts level"
+      },
+      {
+        "id": "speaker",
+        "ko": "스피커에서 소리 출력",
+        "en": "Speaker plays sound"
+      }
+    ],
+    "correctOrder": [
+      "microphone",
+      "mixer",
+      "speaker"
+    ],
+    "cases": [
+      {
+        "input": "안녕하세요|Hello",
+        "expected": "조절된 목소리|Adjusted voice"
+      },
+      {
+        "input": "시험 방송|Sound check",
+        "expected": "조절된 시험음|Adjusted test signal"
+      }
+    ],
+    "question": {
+      "ko": "하늘: “믹서에는 신호가 있는데 스피커는 조용해요.”",
+      "en": "Haneul: “The mixer shows a signal, but the speaker is silent.”"
+    },
+    "exitOptions": [
+      {
+        "id": "trace",
+        "ko": "믹서 이후 연결을 순서대로 점검한다",
+        "en": "Check connections after the mixer in order",
+        "correct": true
+      },
+      {
+        "id": "blame",
+        "ko": "입력은 확인하지 않고 마이크부터 교체한다",
+        "en": "Replace the microphone without checking the signal",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "소리는 입력 → 조절 → 출력 순서로 갑니다. 각 단계의 결과를 확인하면 고장 구간을 좁힐 수 있습니다.",
+      "en": "Sound travels from input to adjustment to output. Checking each stage narrows down the fault."
+    }
+  },
+  {
+    "id": "class_homeroom",
+    "mode": "rule",
+    "title": {
+      "ko": "빈칸은 결석 사유가 아니다",
+      "en": "A blank is not an absence reason"
+    },
+    "context": {
+      "ko": "임시 담임 첫날. 출결 프로그램이 빈 사유를 “무단”으로 처리합니다. 확인된 정보와 미확인 정보를 구분하는 규칙을 고쳐보세요.",
+      "en": "On your first day as acting homeroom teacher, the attendance script treats a blank reason as unexcused. Separate confirmed and unknown information."
+    },
+    "options": [
+      {
+        "id": "assume",
+        "ko": "사유가 비었으면 무단으로 기록",
+        "en": "Record unexcused if reason is blank",
+        "outputs": [
+          "확정|Confirmed",
+          "무단|Unexcused"
+        ]
+      },
+      {
+        "id": "pending",
+        "ko": "확인된 사유만 확정, 빈칸은 확인 중",
+        "en": "Confirm verified reasons; leave blanks pending",
+        "outputs": [
+          "확정|Confirmed",
+          "확인 중|Pending"
+        ]
+      },
+      {
+        "id": "all",
+        "ko": "모든 사유를 확정",
+        "en": "Confirm every reason",
+        "outputs": [
+          "확정|Confirmed",
+          "확정|Confirmed"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "input": "보호자 확인 완료|Guardian confirmed",
+        "expected": "확정|Confirmed"
+      },
+      {
+        "input": "회신 없음|No reply",
+        "expected": "확인 중|Pending"
+      }
+    ],
+    "question": {
+      "ko": "지우: “확인 중이면 출결 업무를 못 끝내나요?”",
+      "en": "Jiwoo: “Does pending mean the attendance task cannot be finished?”"
+    },
+    "exitOptions": [
+      {
+        "id": "record",
+        "ko": "확인 시도와 다음 조치를 기록하고 당일 처리한다",
+        "en": "Record the contact attempt and next step to resolve today’s work",
+        "correct": true
+      },
+      {
+        "id": "guess",
+        "ko": "퇴근하려면 사유를 추측해서 확정해야 한다",
+        "en": "Guess the reason so the teacher can go home",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "모르는 사실은 추측하지 않습니다. 미확인은 확인 중으로 남기고 후속 확인을 기록할 수 있습니다.",
+      "en": "Do not invent missing facts. Leave the reason pending and record a follow-up."
+    }
+  },
+  {
+    "id": "class_counseling_day",
+    "mode": "rule",
+    "title": {
+      "ko": "대화 기록은 누구에게 보일까?",
+      "en": "Who can see a conversation record?"
+    },
+    "context": {
+      "ko": "상담이 끝난 뒤, 학생들은 학급 앱의 정보 공개 범위를 토론합니다. 공지와 개인 상담 기록을 구분해 보세요.",
+      "en": "After a counseling session, the class discusses who should see information in the class app. Distinguish announcements from private notes."
+    },
+    "options": [
+      {
+        "id": "public",
+        "ko": "모든 기록을 학급 전체에 공개",
+        "en": "Share all records with the class",
+        "outputs": [
+          "학급|Class",
+          "학급|Class"
+        ]
+      },
+      {
+        "id": "scope",
+        "ko": "공지는 학급, 개인 기록은 담당 교사",
+        "en": "Announcements to class, personal notes to assigned teacher",
+        "outputs": [
+          "학급|Class",
+          "담당 교사|Assigned teacher"
+        ]
+      },
+      {
+        "id": "closed",
+        "ko": "공지도 개인 기록도 담당 교사만",
+        "en": "Only the assigned teacher sees everything",
+        "outputs": [
+          "담당 교사|Assigned teacher",
+          "담당 교사|Assigned teacher"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "input": "내일 준비물|Tomorrow’s materials",
+        "expected": "학급|Class"
+      },
+      {
+        "input": "개인 상담 메모|Personal counseling note",
+        "expected": "담당 교사|Assigned teacher"
+      }
+    ],
+    "question": {
+      "ko": "하늘: “상담했다는 걸 친구들에게 알려도 되나요?”",
+      "en": "Haneul: “Should we tell classmates that someone had counseling?”"
+    },
+    "exitOptions": [
+      {
+        "id": "minimal",
+        "ko": "업무에 필요한 사람에게 필요한 내용만 공유한다",
+        "en": "Share only needed information with people who need it",
+        "correct": true
+      },
+      {
+        "id": "names",
+        "ko": "다 같이 돕도록 이름과 상담 내용을 공지한다",
+        "en": "Publish the name and details so everyone can help",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "전달 목적에 맞게 범위를 정합니다. 준비물 공지는 널리, 개인 기록은 필요한 담당자에게만 공유합니다.",
+      "en": "Match access to purpose: materials notices reach the class, personal notes reach the assigned staff."
+    }
+  },
+  {
+    "id": "class_admin_day",
+    "mode": "rule",
+    "title": {
+      "ko": "예산을 넘지 않는 계산",
+      "en": "A budget that stays balanced"
+    },
+    "context": {
+      "ko": "케이블 구매 기안을 고친 경험을 수업으로 가져옵니다. 학생들은 “딱 예산만큼이면 살 수 있나요?”라고 묻습니다.",
+      "en": "Use the corrected cable request as a class example. Students ask whether spending exactly the budget is allowed."
+    },
+    "options": [
+      {
+        "id": "strict",
+        "ko": "합계 < 예산일 때만 가능",
+        "en": "Allow only if total < budget",
+        "outputs": [
+          "가능|Allowed",
+          "불가|Blocked",
+          "불가|Blocked"
+        ]
+      },
+      {
+        "id": "within",
+        "ko": "합계 ≤ 예산일 때 가능",
+        "en": "Allow if total ≤ budget",
+        "outputs": [
+          "가능|Allowed",
+          "가능|Allowed",
+          "불가|Blocked"
+        ]
+      },
+      {
+        "id": "always",
+        "ko": "수량이 3개 이하면 항상 가능",
+        "en": "Allow any quantity of three or less",
+        "outputs": [
+          "가능|Allowed",
+          "가능|Allowed",
+          "가능|Allowed"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "input": "15,000 / 30,000",
+        "expected": "가능|Allowed"
+      },
+      {
+        "input": "30,000 / 30,000",
+        "expected": "가능|Allowed"
+      },
+      {
+        "input": "45,000 / 30,000",
+        "expected": "불가|Blocked"
+      }
+    ],
+    "question": {
+      "ko": "민준: “케이블 가격이 바뀌면 어느 값부터 확인하죠?”",
+      "en": "Minjun: “What should we check if the cable price changes?”"
+    },
+    "exitOptions": [
+      {
+        "id": "recalc",
+        "ko": "단가 × 수량으로 합계를 다시 계산한다",
+        "en": "Recalculate the total as price × quantity",
+        "correct": true
+      },
+      {
+        "id": "reuse",
+        "ko": "예전 합계는 승인됐으니 그대로 쓴다",
+        "en": "Keep the old total because it was approved",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "예산 이하는 가능하고 초과는 불가입니다. 같은 금액인 경계값도 시험하세요.",
+      "en": "A total within budget is allowed; an excess is blocked. Test the equal-value boundary too."
+    }
+  },
+  {
+    "id": "class_final",
+    "mode": "sequence",
+    "title": {
+      "ko": "이제 학생들이 설명할 차례",
+      "en": "Now the students explain"
+    },
+    "context": {
+      "ko": "3주 전 순서가 왜 필요한지 묻던 지우가 칠판 앞으로 나옵니다. 학생들이 학교 문제를 해결하는 절차를 구성하도록 도와주세요.",
+      "en": "Three weeks after asking why order matters, Jiwoo comes to the board. Help the class build a process for solving a school problem."
+    },
+    "cards": [
+      {
+        "id": "observe",
+        "ko": "관찰하고 사실 확인",
+        "en": "Observe and verify facts"
+      },
+      {
+        "id": "test",
+        "ko": "가설을 작은 예제로 시험",
+        "en": "Test a hypothesis with a small example"
+      },
+      {
+        "id": "record",
+        "ko": "결과와 후속 조치 기록",
+        "en": "Record results and follow-up"
+      }
+    ],
+    "correctOrder": [
+      "observe",
+      "test",
+      "record"
+    ],
+    "cases": [
+      {
+        "input": "방송이 안 들림|Broadcast is silent",
+        "expected": "검증한 원인 기록|Record verified cause"
+      },
+      {
+        "input": "결석 사유 미확인|Unknown absence reason",
+        "expected": "확인 중과 후속 연락 기록|Record pending and follow-up"
+      }
+    ],
+    "question": {
+      "ko": "지우: “한 번 틀렸으면 실패한 알고리즘인가요?”",
+      "en": "Jiwoo: “If we got it wrong once, has our algorithm failed?”"
+    },
+    "exitOptions": [
+      {
+        "id": "learn",
+        "ko": "시험 결과로 규칙을 고치면 다음 판단이 더 좋아진다",
+        "en": "Use the test result to improve the rule and the next decision",
+        "correct": true
+      },
+      {
+        "id": "hide",
+        "ko": "틀린 결과를 지우면 처음부터 성공한 것이 된다",
+        "en": "Delete the wrong result and call it a first-try success",
+        "correct": false
+      }
+    ],
+    "hint": {
+      "ko": "사실을 먼저 확인하고, 시험으로 가설을 검증한 뒤 결과를 기록합니다. 모르겠다면 후속 조치도 결과입니다.",
+      "en": "Verify facts, test the hypothesis, then record the result. A follow-up is a valid result when facts remain unknown."
+    }
+  }
+]

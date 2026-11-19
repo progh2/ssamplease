@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { PhoneGame, OfficialDocumentGame, LessonGame } from './components/SchoolActivities';
+import { PhoneGame, OfficialDocumentGame } from './components/SchoolActivities';
+import { LessonGame } from './components/LessonGame';
+import { CounselingGame } from './components/CounselingGame';
+import { AttendanceGame } from './components/AttendanceGame';
+import { ExamSupervisionGame } from './components/ExamSupervisionGame';
+import { ExamDeskGame, examDeskIds } from './components/ExamDeskGame';
 import { OmrGame } from './components/OmrGame';
 import { DeskObjects } from './components/DeskObjects';
+import { PurchaseGame, RevisionGame } from './components/PurchaseGames';
+import { CableRepairGame } from './components/CableRepairGame';
 import { EquipmentCheck } from './components/EquipmentCheck';
 import { useDraftState } from './components/useDraftState';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +18,7 @@ import { OfficeScene } from './OfficeScene';
 import { useGameStore, useSaveHealth } from './store';
 import timetables from './content/timetables.json';
 import { nextLesson, timetable } from './engine/schedule';
-import { purchaseBudget, purchaseStage, unitPrice } from './engine/workflow';
+import { purchaseStage, unitPrice } from './engine/workflow';
 import { DeskExercise, exerciseIds } from './components/DeskExercises';
 import { canLeaveSchool, canStartTask, prerequisites, requiredTasksRemaining } from './engine/taskEngine';
 
@@ -24,7 +31,7 @@ export function App() {
   const [boardOpen, setBoardOpen] = useState(true);
   const en = i18n.language.startsWith('en');
   const saveFailed = useSaveHealth((state) => state.failed);
-  const { currentDay, taskStatuses, feedback, completeTask, closeFeedback, advanceDay, reset, accuracy, history, activeScheduledId, enterClassroom, returnToOffice } = useGameStore();
+  const { currentDay, taskStatuses, feedback, completeTask, closeFeedback, advanceDay, reset, history, activeScheduledId, enterClassroom, returnToOffice } = useGameStore();
   const day = days.find((entry) => entry.day === currentDay);
   const pending = day ? requiredTasksRemaining(day.tasks, taskStatuses).length : 0;
   const done = !!day && canLeaveSchool(day.tasks, taskStatuses);
@@ -48,7 +55,7 @@ export function App() {
       <div className="header-actions"><span className="save-dot">● {t(saveFailed ? 'flow.saveFailed' : 'app.saved')}</span><button className="ghost" onClick={changeLanguage}>{t('app.language')}</button><button className="ghost" aria-label={t('app.restart')} onClick={restart}>↻</button></div>
     </header>
     {saveFailed && <p role="alert" className="save-warning">{t('flow.saveFailed')}</p>}
-    <section className="story-strip"><div className="day-badge">{String(currentDay).padStart(2, '0')}</div><div><strong>{t('app.day', { day: currentDay })} — {t(day.titleKey)}</strong><p>{t(day.introKey)}</p></div><span className="accuracy">ACC {accuracy}%</span></section>
+    <section className="story-strip"><div className="day-badge">{String(currentDay).padStart(2, '0')}</div><div><strong>{t('app.day', { day: currentDay })} — {t(day.titleKey)}</strong><p>{t(day.introKey)}</p></div><span className="accuracy">{day.tasks.length - pending} / {day.tasks.length}</span></section>
     <div className="game-grid">
       <section className="scene-panel"><OfficeScene key={activeScheduledId ?? 'office'} classroom={activeScheduledId ? timetable[activeScheduledId].classroom : undefined} />{!activeScheduledId && <DeskObjects onOpen={id => { setBoardOpen(true); setView('desk'); setSelectedTask(id); }} />}<div className="scene-label">{activeScheduledId ? `${timetable[activeScheduledId].period} · ${timetable[activeScheduledId].classroom}` : t('flow.office')}</div></section>
       <aside className={`work-panel ${boardOpen ? '' : 'board-collapsed'}`}>
@@ -70,23 +77,26 @@ export function App() {
               {locked && <p>{prerequisites(task.id).map((id) => t(days.flatMap((entry) => entry.tasks).find((entry) => entry.id === id)!.titleKey)).join(' → ')} → {t(task.titleKey)}</p>}
               {!isDone && needsRoom && <button disabled={locked || currentLesson?.id !== task.id} onClick={() => enterClassroom(task.id)}>{t('flow.enter', { room: scheduled.classroom, period: scheduled.period })}</button>}
               {!isDone && <button disabled={locked || needsRoom} onClick={() => setSelectedTask(task.id)}>{en ? 'Open task' : '업무 시작'} · {t(task.titleKey)}</button>}
-              {!isDone && createPortal(<section hidden={selectedTask !== task.id} className={`task-workspace workspace-${task.kind}`} role="region" aria-label={t(task.titleKey)}>
+              {!isDone && createPortal(<section hidden={selectedTask !== task.id} className={`task-workspace workspace-${task.kind} ${task.id.startsWith('supervise_') ? 'workspace-supervision' : ''}`} role="region" aria-label={t(task.titleKey)}>
               <header><div><small>{en ? 'WORKSPACE' : '전용 작업 화면'}</small><h1>{t(task.titleKey)}</h1></div><button autoFocus onClick={() => setSelectedTask(null)}>{en ? 'Back to office' : '교무실로 돌아가기'}</button></header>
               <p className="workspace-brief">{t(task.descriptionKey)}</p>
               <div className="workspace-body">
               <fieldset disabled={locked || needsRoom} style={{ border: 0, padding: 0, margin: 0 }}>
               {task.kind === 'class' && <LessonGame taskId={task.id} onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
+              {task.kind === 'counseling' && <CounselingGame taskId={task.id} onDone={(status, feedback) => completeTask(task.id, status, feedback)} />}
+              {task.id.startsWith('supervise_') && <ExamSupervisionGame taskId={task.id} onDone={(status, feedback) => completeTask(task.id, status, feedback)} />}
+              {examDeskIds.includes(task.id) && <ExamDeskGame taskId={task.id} onDone={feedback => completeTask(task.id, 'completed', feedback)} />}
               {task.id === 'phone_guardian' && <PhoneGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'official_document' && <OfficialDocumentGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'equipment_check' && <EquipmentCheck onDone={() => completeTask(task.id, 'completed', t('feedback.equipmentFound'))} />}
-              {task.id.startsWith('omr_') && <OmrGame taskId={task.id} missing={task.id === 'omr_missing'} onDone={() => completeTask(task.id, task.choices[0].outcome, t(task.choices[0].feedbackKey))} />}
+              {task.id.startsWith('omr_') && <OmrGame taskId={task.id} missing={task.id === 'omr_missing'} onDone={status => completeTask(task.id, status, status === 'resolved_with_issue' ? (en ? 'Original preserved and flagged for identity confirmation. All 28 cards are included in the handover.' : '원본을 보존하고 기재 사항 확인 필요로 분리했습니다. 별도 확인 카드까지 28장으로 인계합니다.') : t(task.choices[0].feedbackKey))} />}
               {!isDone && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
-              {!isDone && task.id === 'cable_repair' && <CableRepair onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
-              {!isDone && task.id === 'edugreat_purchase' && <ApprovalForm onDone={() => completeTask(task.id, 'completed', t('feedback.submitted'))} />}
-              {!isDone && task.id === 'approval_revision' && <RevisionForm onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}
-              {!isDone && task.kind === 'attendance' && <AttendanceSheet unknown={task.id === 'attendance_unknown'} followup={task.id === 'attendance_followup'} onDone={() => completeTask(task.id, task.id === 'attendance_unknown' ? 'resolved_with_issue' : 'completed', t(task.choices[0].feedbackKey))} />}
+              {!isDone && task.id === 'cable_repair' && <CableRepairGame onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
+              {!isDone && task.id === 'edugreat_purchase' && <PurchaseGame onDone={() => completeTask(task.id, 'completed', t('feedback.submitted'))} />}
+              {!isDone && task.id === 'approval_revision' && <RevisionGame onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}
+              {task.kind === 'attendance' && <AttendanceGame taskId={task.id} onDone={(status, feedback) => completeTask(task.id, status, feedback)} />}
               {!isDone && task.id === 'exam_pack' && <ExamPack onDone={() => completeTask(task.id, 'completed', t('feedback.examPacked'))} />}
-              {!isDone && !task.id.startsWith('omr_') && !exerciseIds.includes(task.id) && !['equipment_check', 'cable_repair', 'edugreat_purchase', 'approval_revision', 'exam_pack', 'phone_guardian', 'official_document'].includes(task.id) && task.kind !== 'attendance' && task.kind !== 'class' && <div className="choices">{task.choices.map((choice, index) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey), task.id === 'grading_partial' && index === 1)}>{t(choice.labelKey)}</button>)}</div>}
+              {task.kind === 'message' && <div className="choices">{task.choices.map((choice) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey))}>{t(choice.labelKey)}</button>)}</div>}
               </fieldset>
               </div></section>, document.body)}
             </article>;
@@ -100,52 +110,11 @@ export function App() {
   </main>;
 }
 
-function CableRepair({ onDone }: { onDone: () => void }) {
-  const { t } = useTranslation();
-  const expected = ['mic', 'mixer', 'amp', 'speaker'];
-  const labels: Record<string, string> = { mic: 'MIC', mixer: 'MIXER', amp: 'AMP', speaker: 'SPEAKER' };
-  const [chain, setChain] = useDraftState<string[]>('cable_repair', 'chain', [], v => v.length <= 4 && new Set(v).size === v.length && v.every(id => ['mic', 'mixer', 'amp', 'speaker'].includes(id)));
-  const [wrong, setWrong] = useState(false);
-  const select = (part: string) => {
-    if (chain.includes(part)) return;
-    const next = [...chain, part];
-    setChain(next); setWrong(false);
-    if (next.length === expected.length) {
-      if (next.every((value, index) => value === expected[index])) onDone();
-      else setWrong(true);
-    }
-  };
-  return <div className="repair-game"><p>{t('repair.instruction')}</p><div className="signal-chain">{chain.map((part, index) => <span key={part}>{index > 0 && <i>→</i>}{labels[part]}</span>)}</div><div className="parts">{['speaker', 'mic', 'amp', 'mixer'].map((part) => <button disabled={chain.includes(part)} key={part} onClick={() => select(part)}>{labels[part]}</button>)}</div>{wrong && <strong>{t('repair.wrong')}</strong>}<button className="reset-link" onClick={() => { setChain([]); setWrong(false); }}>{t('repair.reset')}</button></div>;
-}
-
-function ApprovalForm({ onDone }: { onDone: () => void }) {
-  const { t } = useTranslation();
-  const quantity = useGameStore((state) => state.purchaseQuantity);
-  const setQuantity = useGameStore((state) => state.setPurchaseQuantity);
-  const fields = [['purpose', 'purposeValue'], ['item', 'itemValue'], ['budget', 'budgetValue'], ['attachment', 'attachmentValue'], ['line', 'lineValue']];
-  return <div className="approval-form"><h3>{t('approval.title')}</h3>{fields.slice(0, 2).map(([label, value]) => <label key={label}><span>{t(`approval.${label}`)}</span><input value={t(`approval.${value}`)} readOnly /></label>)}<label><span>{t('approval.quantity')}</span><select value={quantity} onChange={(event) => setQuantity(Number(event.target.value))}><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>{fields.slice(2).map(([label, value]) => <label key={label}><span>{t(`approval.${label}`)}</span><input value={t(`approval.${value}`)} readOnly /></label>)}<p>{t('flow.cost', { total: quantity * unitPrice, budget: purchaseBudget })}</p>{quantity * unitPrice > purchaseBudget && <p role="alert">{t('flow.overBudget')}</p>}<button disabled={quantity * unitPrice > purchaseBudget} onClick={onDone}>{t('approval.submit')}</button></div>;
-}
-
 function PurchaseRecord() {
   const { t } = useTranslation();
   const { history, purchaseQuantity } = useGameStore();
   const stage = purchaseStage(history);
   return <section className="purchase-record"><h2>{t('approval.title')}</h2><p>{t(`flow.${stage}`)}</p>{stage !== 'draft' && <p>{t('approval.itemValue')} × {purchaseQuantity} · {purchaseQuantity * unitPrice}</p>}</section>;
-}
-
-function RevisionForm({ onDone }: { onDone: () => void }) {
-  const { t } = useTranslation();
-  const { comparisonAttached, attachComparison, purchaseQuantity } = useGameStore();
-  return <div className="approval-form"><p>{t('flow.revisionReason')}</p><p>{t('approval.itemValue')} × {purchaseQuantity}</p><button disabled={comparisonAttached} onClick={attachComparison}>{t(comparisonAttached ? 'flow.attached' : 'flow.attach')}</button><button disabled={!comparisonAttached} onClick={onDone}>{t('actions.revise')}</button></div>;
-}
-
-function AttendanceSheet({ unknown, followup, onDone }: { unknown: boolean; followup: boolean; onDone: () => void }) {
-  const { t } = useTranslation();
-  const [pending, setPending] = useState(false);
-  const students = unknown
-    ? [['2301', '김하늘', pending ? 'pending' : 'unknown'], ['2302', '박지우', 'present'], ['2303', '서민준', 'present']]
-    : [['2301', '김하늘', followup ? 'absent' : 'present'], ['2302', '박지우', 'fieldTrip'], ['2303', '서민준', 'present']];
-  return <div className="attendance-sheet"><h3>{t('attendance.title')}</h3>{students.map(([number, name, status]) => <div className="student-row" key={number}><b>{number}</b><span>{name}</span><em className={`attendance-${status}`}>{t(`attendance.${status}`)}</em></div>)}{unknown && <><p className="call-log">☎ {t('attendance.callLog')}</p><p>{t('attendance.hint')}</p><button onClick={() => setPending(true)} disabled={pending}>{t('actions.pending')}</button></>}<button className="attendance-save" disabled={unknown && !pending} onClick={onDone}>{t('actions.saveAttendance')}</button></div>;
 }
 
 function ExamPack({ onDone }: { onDone: () => void }) {

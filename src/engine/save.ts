@@ -85,5 +85,6 @@ export function recoverSave(value: unknown) {
   const quantity = typeof data.purchaseQuantity === 'number' && [1, 2, 3].includes(data.purchaseQuantity) ? data.purchaseQuantity : 2;
   const comparisonAttached = currentDay >= 7 && data.comparisonAttached === true;
   const drafts = sanitizeDrafts(data.drafts, Object.keys(taskStatuses).filter(id => taskStatuses[id] === 'available'));
-  return { currentDay, taskStatuses, accuracy, history, purchaseQuantity: quantity, comparisonAttached, drafts };
+  const memories = sanitizeDrafts(data.memories, Object.keys(history));
+  return { currentDay, taskStatuses, accuracy, history, purchaseQuantity: quantity, comparisonAttached, drafts, memories };
 }

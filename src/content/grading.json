@@ -1,0 +1,346 @@
+{
+  "grading_basic": {
+    "title": "서로 다른 말, 같은 생각",
+    "titleEn": "Different words, the same idea",
+    "question": "순차 실행이 무엇인지 설명하세요.",
+    "questionEn": "Explain sequential execution.",
+    "brief": "교과서 문장을 그대로 쓰지 않아도 뜻이 같으면 인정합니다. 점수와 함께 학생에게 도움이 될 피드백 한 가지를 남기세요.",
+    "briefEn": "Equivalent wording earns credit. Leave one useful comment alongside each score.",
+    "criteria": [
+      {
+        "id": "order",
+        "points": 2,
+        "label": "정해진 순서대로 실행한다고 설명",
+        "labelEn": "Explains execution in a defined order"
+      },
+      {
+        "id": "each",
+        "points": 1,
+        "label": "한 단계 뒤에 다음 단계가 실행됨을 설명",
+        "labelEn": "Explains that one step follows another"
+      }
+    ],
+    "comments": [
+      {
+        "id": "clear",
+        "label": "설명과 예시가 기준을 충족했어요",
+        "labelEn": "Your explanation meets the criteria"
+      },
+      {
+        "id": "order",
+        "label": "결과를 출력하기 전에 계산해야 해요",
+        "labelEn": "Calculate before displaying the result"
+      },
+      {
+        "id": "partial",
+        "label": "순서뿐 아니라 단계 사이의 관계도 써 보세요",
+        "labelEn": "Explain how one step follows another as well"
+      }
+    ],
+    "papers": [
+      {
+        "id": "2301",
+        "name": "김하늘",
+        "nameEn": "Kim Haneul",
+        "answer": "순서대로 한 줄씩 실행하고, 한 단계가 끝나면 다음 단계를 실행한다.",
+        "answerEn": "Run each line in order; when a step finishes, run the next one.",
+        "credits": [
+          "order",
+          "each"
+        ],
+        "comment": "clear",
+        "ambiguous": false,
+        "reaction": "말을 다르게 써도 괜찮군요! 방송 순서도 이렇게 짜 볼게요.",
+        "reactionEn": "I can explain it in my own words! I'll try planning our broadcast this way."
+      },
+      {
+        "id": "2302",
+        "name": "박지우",
+        "nameEn": "Park Jiwoo",
+        "answer": "먼저 3 + 2의 답을 출력한 다음, 3과 2를 계산한다. 순서는 바뀌어도 된다.",
+        "answerEn": "Display the answer to 3 + 2 first, then calculate it. The order can be swapped.",
+        "credits": [],
+        "comment": "order",
+        "ambiguous": false,
+        "reaction": "아, 답이 아직 없는데 보여 달라고 한 거였네요.",
+        "reactionEn": "Oh, I was asking it to display an answer that doesn't exist yet."
+      },
+      {
+        "id": "2303",
+        "name": "서민준",
+        "nameEn": "Seo Minjun",
+        "answer": "위에서 아래 방향으로, 앞 문장을 마친 뒤 바로 다음 문장으로 간다.",
+        "answerEn": "Go from top to bottom; finish the previous instruction before moving to the next.",
+        "credits": [
+          "order",
+          "each"
+        ],
+        "comment": "clear",
+        "ambiguous": false,
+        "reaction": "교과서 문장을 외우지 않아도 설명하면 되는 거네요.",
+        "reactionEn": "So I can explain it instead of memorizing the textbook wording."
+      }
+    ],
+    "nextStep": "trace",
+    "nextStory": "지우가 계산보다 출력을 앞에 두었습니다. 다음 수업에서는 실행표로 값이 생기는 순간을 함께 확인하기로 했습니다.",
+    "nextStoryEn": "Jiwoo placed output before calculation. You plan a trace-table demonstration to show when values become available."
+  },
+  "grading_partial": {
+    "title": "점수 뒤에 있는 과정",
+    "titleEn": "The reasoning behind the score",
+    "question": "합계를 0에서 시작해 1, 2, 3을 더하는 과정과 최종 값을 쓰세요.",
+    "questionEn": "Starting at zero, show how to add 1, 2 and 3 and give the final result.",
+    "brief": "과정과 결과는 독립적으로 채점합니다. 뜻이 같은 풀이를 인정하되, 판독할 수 없는 내용은 점수를 추측하지 않고 공동 검토로 보냅니다.",
+    "briefEn": "Mark process and result independently. Accept equivalent solutions; send unreadable work for joint review instead of guessing a score.",
+    "criteria": [
+      {
+        "id": "process",
+        "points": 2,
+        "label": "0에서 시작해 1·2·3을 각각 더하는 과정",
+        "labelEn": "Starts at 0 and adds 1, 2 and 3 once each"
+      },
+      {
+        "id": "result",
+        "points": 1,
+        "label": "최종 결과 6을 명확하게 기재",
+        "labelEn": "Clearly states the final result as 6"
+      }
+    ],
+    "comments": [
+      {
+        "id": "result",
+        "label": "과정은 맞아요. 마지막 계산을 다시 확인해요",
+        "labelEn": "Your process is correct; check the final calculation"
+      },
+      {
+        "id": "clear",
+        "label": "다른 표현으로도 과정과 결과를 잘 설명했어요",
+        "labelEn": "Your equivalent explanation shows both process and result"
+      },
+      {
+        "id": "process",
+        "label": "결과만 쓰지 말고 계산 과정도 남겨 주세요",
+        "labelEn": "Show the process as well as the result"
+      }
+    ],
+    "papers": [
+      {
+        "id": "2301",
+        "name": "김하늘",
+        "nameEn": "Kim Haneul",
+        "answer": "합계를 0으로 정하고 1~3을 하나씩 더한다. 최종 결과: 5",
+        "answerEn": "Start the total at zero and add each number from 1 to 3. Final result: 5.",
+        "credits": [
+          "process"
+        ],
+        "comment": "result",
+        "ambiguous": false,
+        "reaction": "결과가 틀리면 전부 틀린 줄 알았어요. 마지막 덧셈을 고쳐 볼게요.",
+        "reactionEn": "I thought a wrong result meant everything was wrong. I'll fix the final addition."
+      },
+      {
+        "id": "2302",
+        "name": "박지우",
+        "nameEn": "Park Jiwoo",
+        "answer": "0 → 0+1=1 → 1+2=3 → 3+3=6. 따라서 6.",
+        "answerEn": "0 → 0+1=1 → 1+2=3 → 3+3=6. Therefore 6.",
+        "credits": [
+          "process",
+          "result"
+        ],
+        "comment": "clear",
+        "ambiguous": false,
+        "reaction": "어제 실행 순서를 다시 따라 해 보니 이번에는 풀렸어요.",
+        "reactionEn": "Tracing the steps again after yesterday's feedback helped me solve this one."
+      },
+      {
+        "id": "2303",
+        "name": "서민준",
+        "nameEn": "Seo Minjun",
+        "answer": "0 + 1 + [번져서 읽을 수 없음] + 3 = [겹쳐 쓴 숫자]",
+        "answerEn": "0 + 1 + [ink smear: unreadable] + 3 = [overwritten digit]",
+        "credits": [],
+        "comment": "review",
+        "ambiguous": true,
+        "reaction": "원본을 보존하고 교과 협의 기록에 올렸습니다. 확인 전까지 점수는 미확정입니다.",
+        "reactionEn": "The original is preserved and a joint-review note is filed. The score remains pending confirmation."
+      }
+    ],
+    "nextStep": "calculation",
+    "nextStory": "하늘의 과정 점수는 지켰고, 민준의 흐릿한 답안은 공동 검토로 넘겼습니다. 다음 수업에서는 마지막 계산을 스스로 검산하게 합니다.",
+    "nextStoryEn": "Haneul kept the process credit and Minjun's blurred paper awaits joint review. Next lesson, students will check their final calculations."
+  },
+  "grading_review": {
+    "title": "기준을 끝까지 일관되게",
+    "titleEn": "Apply the same criteria consistently",
+    "question": "방송 시작 전 장비 확인 절차를 순서와 이유를 포함해 설명하세요.",
+    "questionEn": "Explain the order of pre-broadcast equipment checks and why it matters.",
+    "brief": "동료 교사의 임시 점수는 참고 자료일 뿐입니다. 답안의 근거로 다시 채점하세요. 뜻이 같은 설명에는 같은 점수를 부여합니다.",
+    "briefEn": "A colleague's provisional score is only a reference. Mark the evidence in each answer and give equivalent explanations equal credit.",
+    "criteria": [
+      {
+        "id": "order",
+        "points": 2,
+        "label": "음량을 낮춘 상태에서 연결을 확인한 뒤 신호 시험",
+        "labelEn": "Checks connections at low volume before testing the signal"
+      },
+      {
+        "id": "reason",
+        "points": 1,
+        "label": "큰 소음이나 장비 손상을 예방하는 이유",
+        "labelEn": "Explains prevention of loud noise or equipment damage"
+      }
+    ],
+    "comments": [
+      {
+        "id": "clear",
+        "label": "순서와 안전한 이유를 모두 설명했어요",
+        "labelEn": "You explained both order and safety"
+      },
+      {
+        "id": "reason",
+        "label": "절차를 지키는 이유도 설명해 보세요",
+        "labelEn": "Explain why the procedure matters too"
+      },
+      {
+        "id": "order",
+        "label": "시험 전에 음량과 연결 상태를 먼저 확인해요",
+        "labelEn": "Check volume and connections before testing"
+      }
+    ],
+    "papers": [
+      {
+        "id": "2301",
+        "name": "김하늘",
+        "nameEn": "Kim Haneul",
+        "answer": "소리를 낮추고 케이블을 꽂은 뒤 시험해요. 갑자기 큰 소리가 나면 안 되니까요.",
+        "answerEn": "Lower the volume, connect cables, then test. We don't want a sudden loud sound.",
+        "credits": [
+          "order",
+          "reason"
+        ],
+        "comment": "clear",
+        "ambiguous": false,
+        "reaction": "방송반에서 했던 점검이 수업 내용이랑 이어지네요.",
+        "reactionEn": "What we checked in the broadcasting club connects to our lesson.",
+        "priorScore": 2
+      },
+      {
+        "id": "2302",
+        "name": "박지우",
+        "nameEn": "Park Jiwoo",
+        "answer": "음량을 낮춘다 → 연결 확인 → 신호를 시험한다.",
+        "answerEn": "Lower volume → check connections → test signal.",
+        "credits": [
+          "order"
+        ],
+        "comment": "reason",
+        "ambiguous": false,
+        "reaction": "순서는 썼는데 왜 하는지는 빠졌네요.",
+        "reactionEn": "I wrote the steps but left out why they matter.",
+        "priorScore": 3
+      },
+      {
+        "id": "2303",
+        "name": "서민준",
+        "nameEn": "Seo Minjun",
+        "answer": "먼저 최대 음량으로 시험하고 안 들리면 선을 바꾼다.",
+        "answerEn": "Test at maximum volume first; if nothing plays, change the cable.",
+        "credits": [],
+        "comment": "order",
+        "ambiguous": false,
+        "reaction": "점검도 순서가 중요하네요. 낮은 음량부터 시작할게요.",
+        "reactionEn": "The order matters here too. I'll start at low volume.",
+        "priorScore": 1
+      }
+    ],
+    "nextStep": "trace",
+    "nextStory": "방송반 경험을 알고리즘 수업에 연결했습니다. 다음에는 절차와 그 이유를 한 줄씩 짝지어 보게 합니다.",
+    "nextStoryEn": "You linked broadcasting experience to algorithms. Next, students will pair each procedural step with its reason."
+  },
+  "grading_post_exam": {
+    "title": "시험 뒤에 남은 질문",
+    "titleEn": "Questions left after the exam",
+    "question": "비가 오고 우산이 없으면 우산을 빌린다. 그 외에는 바로 등교한다. 조건을 표현하고, 비가 오지만 우산이 있는 경우를 판단하세요.",
+    "questionEn": "If it is raining and you have no umbrella, borrow one. Otherwise, go to school. Express the condition and decide what happens when it rains but you have an umbrella.",
+    "brief": "조건의 논리와 예시 판단을 따로 확인합니다. 겹쳐 쓴 답안은 추측하지 말고 원본을 보존해 공동 검토로 보냅니다.",
+    "briefEn": "Assess the logical condition and the example separately. Preserve overwritten answers and request joint review rather than guessing.",
+    "criteria": [
+      {
+        "id": "condition",
+        "points": 2,
+        "label": "비가 옴 AND 우산 없음의 두 조건",
+        "labelEn": "Uses both raining AND no umbrella"
+      },
+      {
+        "id": "example",
+        "points": 1,
+        "label": "우산이 있는 예시에서는 바로 등교",
+        "labelEn": "Goes directly to school in the umbrella example"
+      }
+    ],
+    "comments": [
+      {
+        "id": "clear",
+        "label": "조건과 예시를 모두 정확하게 연결했어요",
+        "labelEn": "You connected the condition and example correctly"
+      },
+      {
+        "id": "condition",
+        "label": "두 조건을 동시에 만족해야 하는지 확인해요",
+        "labelEn": "Check whether both conditions must hold"
+      },
+      {
+        "id": "example",
+        "label": "우산이 이미 있는 경우를 다시 따라가 봐요",
+        "labelEn": "Trace the case where you already have an umbrella"
+      }
+    ],
+    "papers": [
+      {
+        "id": "2301",
+        "name": "김하늘",
+        "nameEn": "Kim Haneul",
+        "answer": "비가 오거나 우산이 없으면 빌린다. 우산이 있으면 바로 등교한다.",
+        "answerEn": "Borrow if it rains OR there is no umbrella. With an umbrella, go directly to school.",
+        "credits": [
+          "example"
+        ],
+        "comment": "condition",
+        "ambiguous": false,
+        "reaction": "'거나'와 '그리고'가 다르다는 걸 놓쳤어요.",
+        "reactionEn": "I missed the difference between OR and AND."
+      },
+      {
+        "id": "2302",
+        "name": "박지우",
+        "nameEn": "Park Jiwoo",
+        "answer": "비가 오고, 동시에 우산이 없을 때만 빌린다. 우산이 있으면 바로 등교.",
+        "answerEn": "Borrow only when it rains AND there is no umbrella. With one, go directly to school.",
+        "credits": [
+          "condition",
+          "example"
+        ],
+        "comment": "clear",
+        "ambiguous": false,
+        "reaction": "조건을 하나씩 확인하니까 확실해졌어요.",
+        "reactionEn": "Checking each condition separately made it clear."
+      },
+      {
+        "id": "2303",
+        "name": "서민준",
+        "nameEn": "Seo Minjun",
+        "answer": "비 [겹쳐 쓴 연결어: 판독 불가] 우산 없음 → 빌림 / 예시: [지운 흔적]",
+        "answerEn": "Rain [overwritten connector: unreadable] no umbrella → borrow / example: [erasure]",
+        "credits": [],
+        "comment": "review",
+        "ambiguous": true,
+        "reaction": "원본 대조가 필요한 답안으로 분류했습니다. 답안을 임의로 고치지 않습니다.",
+        "reactionEn": "This paper needs comparison with the original. Student work is not altered."
+      }
+    ],
+    "nextStep": "condition",
+    "nextStory": "시험은 끝났지만 배움은 이어집니다. 다음 수업에서는 AND와 OR를 같은 생활 사례에 적용해 비교합니다.",
+    "nextStoryEn": "The exam is over, but learning continues. Next lesson compares AND and OR in the same everyday situation."
+  }
+}

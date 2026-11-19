@@ -1,0 +1,23 @@
+{
+  "check_supervision": {
+    "title": {"ko":"감독표에서 내 일정을 옮기기","en":"Transfer your invigilation assignments"},
+    "brief": {"ko":"이번 감독표에서 신규 교사인 나에게 배정된 일정은 월요일 1교시 2-3, 화요일 2교시 2-1입니다. 다른 교사의 일정은 옮기지 마세요. 변경 공지가 오면 새 공지를 우선합니다.","en":"Your assignments are Monday period 1 in 2-3 and Tuesday period 2 in 2-1. Do not copy a colleague's assignment. A later change notice overrides this schedule."},
+    "bins":[{"id":"mon","ko":"월요일 일정","en":"Monday schedule"},{"id":"tue","ko":"화요일 일정","en":"Tuesday schedule"},{"id":"other","ko":"내 일정 아님","en":"Not my assignment"}],
+    "items":[{"id":"m","ko":"신규 교사 · 월 1교시 · 2-3","en":"You · Mon P1 · 2-3","target":"mon"},{"id":"other","ko":"김한결 교사 · 화 1교시 · 2-2","en":"Hangeul Kim · Tue P1 · 2-2","target":"other"},{"id":"t","ko":"신규 교사 · 화 2교시 · 2-1","en":"You · Tue P2 · 2-1","target":"tue"}],
+    "ending":{"ko":"내 일정 두 건만 옮겼습니다. 시험 당일 변경 공지를 다시 확인하기로 메모했습니다.","en":"Two personal assignments recorded, with a reminder to check for changes on exam day."}
+  },
+  "exam_count_day11": {
+    "title":{"ko":"28명에게 나눠 줄 시험지","en":"Exam papers for 28 candidates"},
+    "brief":{"ko":"응시자는 28명입니다. 2학년 정보 시험지 묶음 10부 + 10부 + 8부를 배부함에 넣으세요. 별도 표시된 예비 2부와 다른 교과 시험지는 배부 수량에서 제외합니다.","en":"There are 28 candidates. Put the three informatics bundles (10 + 10 + 8) into the distribution tray. Keep the marked two spare copies separate; another subject does not belong in the tray."},
+    "bins":[{"id":"distribute","ko":"배부함","en":"Distribution tray"},{"id":"reserve","ko":"예비 보관함","en":"Spare tray"},{"id":"return","ko":"다른 교과 담당에게","en":"Return to subject lead"}],
+    "items":[{"id":"a","ko":"정보 시험지 · A 묶음 · 10부","en":"Informatics · bundle A · 10 copies","target":"distribute"},{"id":"spare","ko":"정보 시험지 · 예비 표시 · 2부","en":"Informatics · marked spare · 2 copies","target":"reserve"},{"id":"b","ko":"정보 시험지 · B 묶음 · 10부","en":"Informatics · bundle B · 10 copies","target":"distribute"},{"id":"wrong","ko":"국어 시험지 · 8부","en":"Korean language · 8 copies","target":"return"},{"id":"c","ko":"정보 시험지 · C 묶음 · 8부","en":"Informatics · bundle C · 8 copies","target":"distribute"}],
+    "ending":{"ko":"배부 28부와 예비 2부를 구분했습니다. 예비분을 응시자 수에 더하지 않고 감독 교실로 이동합니다.","en":"28 distribution copies and 2 spares are separate. You are ready to enter the exam room."}
+  },
+  "exam_material_sort": {
+    "title":{"ko":"확인 필요 카드도 답안입니다","en":"Flagged cards are still answer sheets"},
+    "brief":{"ko":"정상 답안 27장과 학번 확인 필요 1장은 모두 학생 원본입니다. 확인 필요 카드는 표시된 별도 봉투로, 정상 답안은 원본 보관으로 분리하고 전체 28장으로 인계합니다. 미사용 시험지와 처리 기록은 따로 보관합니다.","en":"27 normal sheets plus 1 sheet awaiting ID verification are all student originals. Put the flagged sheet in its labeled envelope and hand over a total of 28. Keep unused papers and the processing log separately."},
+    "bins":[{"id":"original","ko":"답안 원본 보관","en":"Original answer sheets"},{"id":"pending","ko":"확인 필요 봉투","en":"Verification envelope"},{"id":"unused","ko":"미사용 자료","en":"Unused materials"},{"id":"log","ko":"인계 기록철","en":"Handover records"}],
+    "items":[{"id":"normal","ko":"정상 답안 27장","en":"27 checked answer sheets","target":"original"},{"id":"flag","ko":"학번 확인 필요 답안 1장","en":"1 sheet awaiting ID verification","target":"pending"},{"id":"blank","ko":"남은 빈 시험지 2부","en":"2 unused exam papers","target":"unused"},{"id":"record","ko":"감독 조치·수량 대조 기록","en":"Incident and reconciliation log","target":"log"}],
+    "ending":{"ko":"확인 필요 답안을 폐기하거나 누락하지 않고 정상 답안과 함께 총 28장으로 인계했습니다.","en":"All 28 originals were handed over, including the flagged sheet. No student work was discarded."}
+  }
+}

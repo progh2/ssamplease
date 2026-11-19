@@ -10,6 +10,7 @@
   "message_approval_return": ["edugreat_purchase"],
   "approval_revision": ["message_approval_return"],
   "message_approval_done": ["approval_revision"],
+  "official_document": ["message_approval_done"],
   "message_budget_close": ["message_approval_done"],
   "exam_pack": ["message_exam_schedule"],
   "check_supervision": ["exam_pack"],

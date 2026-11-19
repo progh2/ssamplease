@@ -1,0 +1,70 @@
+{
+  "attendance_basic": {
+    "title": "담임 선생님이 없는 아침", "titleEn": "An unexpected morning as homeroom teacher",
+    "brief": "부담임인 당신에게 출결 대장이 왔습니다. 교실에 보이지 않는다는 이유만으로 결석을 확정하지 마세요.",
+    "briefEn": "The register lands on your desk. A student being out of sight does not by itself prove absence.",
+    "sources": [
+      { "id": "roll", "title": "08:30 교실 확인", "titleEn": "08:30 classroom check", "body": "김하늘은 교실에서 출석 확인. 박지우와 서민준은 자리에 없음.", "bodyEn": "Kim Haneul is present. Park Jiwoo and Seo Minjun are not at their desks." },
+      { "id": "gate", "title": "08:42 등교 기록", "titleEn": "08:42 arrival record", "body": "박지우가 08:42에 교실에 도착함. 학교의 가상 출석 기준 시각은 08:30.", "bodyEn": "Park Jiwoo reached class at 08:42. This fictional school's attendance cutoff is 08:30." },
+      { "id": "event", "title": "학교 대표 행사 참가 확인서", "titleEn": "Authorized school-event notice", "body": "서민준은 오늘 오전 학교 대표 행사 참가 승인. 게임 속 규정에 따라 인정 결석으로 기록.", "bodyEn": "Seo Minjun has approval to represent the school this morning. Record authorized absence under the game's rules." }
+    ],
+    "students": [
+      { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "status": "present", "evidence": "roll" },
+      { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "status": "late", "evidence": "gate" },
+      { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "status": "authorized", "evidence": "event" }
+    ],
+    "ending": "지우는 늦게라도 도착했고, 민준은 승인된 행사 중이었습니다. 빈 자리와 결석 사유는 같은 정보가 아니라는 것을 배웠습니다.",
+    "endingEn": "Jiwoo arrived late; Minjun was at an authorized event. An empty desk and a reason for absence are different kinds of evidence."
+  },
+  "attendance_unknown": {
+    "title": "빈칸을 억지로 채우지 않기", "titleEn": "Leave uncertainty visible",
+    "brief": "하늘의 자리는 비어 있고 보호자와 통화하지 못했습니다. 연락 시도는 기록하되, 확인되지 않은 사유를 만들어 내지 마세요.",
+    "briefEn": "Haneul is absent and the guardian did not answer. Record the attempt without inventing a reason.",
+    "sources": [
+      { "id": "roll", "title": "오늘 교실 확인", "titleEn": "Today's classroom check", "body": "박지우와 서민준은 08:30 이전 입실. 김하늘은 부재.", "bodyEn": "Park Jiwoo and Seo Minjun arrived before 08:30. Kim Haneul is absent." },
+      { "id": "call", "title": "보호자 연락 시도 기록", "titleEn": "Guardian contact-attempt record", "body": "등록된 보호자에게 결석 사유 확인을 위해 연락했으나 응답 없음. 확인된 사유 없음.", "bodyEn": "A call to the registered guardian to confirm the reason was unanswered. No reason has been confirmed." },
+      { "id": "rumor", "title": "복도에서 들은 이야기", "titleEn": "A hallway remark", "body": "다른 학생: 아마 감기 아닐까요? — 확인된 정보가 아닌 추측.", "bodyEn": "Another student: Maybe it is a cold? — This is speculation, not confirmed evidence." }
+    ],
+    "students": [
+      { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "status": "pending", "evidence": "call" },
+      { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "status": "present", "evidence": "roll" },
+      { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "status": "present", "evidence": "roll" }
+    ],
+    "ending": "하늘의 결석 사유를 확인 중으로 남기고 연락 시도를 함께 보관했습니다. 회신이 오면 이 기록을 근거로 보완할 수 있습니다.",
+    "endingEn": "Haneul's reason remains pending, alongside the contact attempt. A later reply can complete this record."
+  },
+  "attendance_followup": {
+    "title": "어제의 확인 중, 오늘의 회신", "titleEn": "Yesterday's pending entry, today's reply",
+    "brief": "보호자 회신이 도착했습니다. 기존의 연락 기록을 지우지 않고, 새 근거를 붙여 어제의 미확정 사유를 보완합니다.",
+    "briefEn": "The guardian replied. Keep the original contact log and add the new evidence to complete yesterday's pending reason.",
+    "sources": [
+      { "id": "reply", "title": "보호자 회신 + 제출 확인", "titleEn": "Guardian reply and submitted confirmation", "body": "김하늘은 어제와 오늘 병원 진료로 결석. 필요한 확인 자료 제출 완료. 게임 속 규정에 따라 질병 결석 처리 가능.", "bodyEn": "Kim Haneul missed yesterday and today for medical care. Required confirmation has been submitted, allowing illness absence under the game's rules." },
+      { "id": "roll", "title": "오늘 교실 확인", "titleEn": "Today's classroom check", "body": "서민준은 08:30 이전 입실. 김하늘과 박지우는 자리에 없음.", "bodyEn": "Seo Minjun arrived before 08:30. Kim Haneul and Park Jiwoo are not at their desks." },
+      { "id": "gate", "title": "08:36 등교 기록", "titleEn": "08:36 arrival record", "body": "박지우가 08:36에 교실 도착. 가상 기준 시각 08:30보다 늦게 입실.", "bodyEn": "Park Jiwoo arrived at 08:36, after the fictional 08:30 cutoff." }
+    ],
+    "students": [
+      { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "status": "illness", "evidence": "reply" },
+      { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "status": "late", "evidence": "gate" },
+      { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "status": "present", "evidence": "roll" }
+    ],
+    "ending": "어제 연락한 기록은 남기고 보호자 회신을 연결했습니다. 하늘의 어제 미확정 사유와 오늘 결석 모두 확인된 자료로 보완했습니다.",
+    "endingEn": "The original attempt is retained with the guardian reply attached. Yesterday's pending reason and today's absence now have documented support."
+  },
+  "attendance_final": {
+    "title": "마지막 아침도, 근거부터", "titleEn": "Evidence first, even on the last morning",
+    "brief": "방송반 업무가 늘었지만 출결도 마무리해야 합니다. 교실 밖에 있는 학생에게는 승인된 활동 기록이 있는지 먼저 확인하세요.",
+    "briefEn": "Broadcast duties have grown, but the register still needs attention. Check approved activity records for students outside the classroom.",
+    "sources": [
+      { "id": "roll", "title": "오늘 교실 확인", "titleEn": "Today's classroom check", "body": "박지우와 서민준은 08:30 이전 입실. 김하늘은 교실에 없음.", "bodyEn": "Park Jiwoo and Seo Minjun arrived before 08:30. Kim Haneul is not in the classroom." },
+      { "id": "event", "title": "교외 학교 대표 방송 행사 승인", "titleEn": "Approved off-campus school broadcast event", "body": "김하늘은 학교 대표 방송 행사에 오전 참가 승인. 담당 교사가 인솔 확인. 게임 속 규정상 인정 결석.", "bodyEn": "Kim Haneul is approved to represent the school at an off-campus broadcast event this morning. A supervising teacher confirmed attendance. Authorized absence under the game's rules." },
+      { "id": "old", "title": "지난주 질병 결석 기록", "titleEn": "Last week's illness record", "body": "지난주의 김하늘 진료 기록. 오늘의 사유를 판단할 근거는 아님.", "bodyEn": "Haneul's medical record from last week. It does not establish today's reason." }
+    ],
+    "students": [
+      { "id": "2301", "name": "김하늘", "nameEn": "Kim Haneul", "status": "authorized", "evidence": "event" },
+      { "id": "2302", "name": "박지우", "nameEn": "Park Jiwoo", "status": "present", "evidence": "roll" },
+      { "id": "2303", "name": "서민준", "nameEn": "Seo Minjun", "status": "present", "evidence": "roll" }
+    ],
+    "ending": "빈 자리만 보고 지난주 사유를 복사하지 않았습니다. 하늘은 오늘 학교 대표로 방송 현장에 있습니다.",
+    "endingEn": "You did not copy last week's reason into an empty desk's record. Today, Haneul is representing the school at a broadcast event."
+  }
+}
