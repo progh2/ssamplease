@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { HotMessenger } from './components/HotMessenger';
 import { createPortal } from 'react-dom';
 import { PhoneGame, OfficialDocumentGame } from './components/SchoolActivities';
 import { LessonGame } from './components/LessonGame';
@@ -64,8 +65,7 @@ export function App() {
         <nav>{(['desk', 'messenger', 'timetable', 'approval'] as View[]).map((item) => <button key={item} className={view === item ? 'active' : ''} onClick={() => setView(item)}>{t(`nav.${item}`)}</button>)}</nav>
         <div className="schedule-strip"><span>{activeScheduledId ? t('flow.inClass', { room: timetable[activeScheduledId].classroom, period: timetable[activeScheduledId].period }) : currentLesson ? t('flow.nextClass', { room: timetable[currentLesson.id].classroom, period: timetable[currentLesson.id].period }) : t('flow.deskTime')}</span>{activeScheduledId && <button onClick={returnToOffice}>{t('flow.return')}</button>}</div>
         {view === 'approval' && <PurchaseRecord />}
-        {view === 'timetable' ? <Timetable /> : <div className="task-list">
-          {view === 'messenger' && visibleTasks.length === 0 && <p className="empty">{t('messenger.empty')}</p>}
+        {view === 'messenger' ? <HotMessenger compact /> : view === 'timetable' ? <Timetable /> : <div className="task-list">
           {visibleTasks.map((task) => {
             const status = taskStatuses[task.id] ?? 'available'; const isDone = ['completed', 'resolved_with_issue'].includes(status);
             const locked = !canStartTask(task.id, progress);
@@ -96,7 +96,7 @@ export function App() {
               {!isDone && task.id === 'approval_revision' && <RevisionGame onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}
               {task.kind === 'attendance' && <AttendanceGame taskId={task.id} onDone={(status, feedback) => completeTask(task.id, status, feedback)} />}
               {!isDone && task.id === 'exam_pack' && <ExamPack onDone={() => completeTask(task.id, 'completed', t('feedback.examPacked'))} />}
-              {task.kind === 'message' && <div className="choices">{task.choices.map((choice) => <button key={choice.labelKey} onClick={() => completeTask(task.id, choice.outcome, t(choice.feedbackKey))}>{t(choice.labelKey)}</button>)}</div>}
+              {task.kind === 'message' && selectedTask === task.id && <HotMessenger initialTask={task.id} />}
               </fieldset>
               </div></section>, document.body)}
             </article>;

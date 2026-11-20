@@ -1,0 +1,40 @@
+import { test, expect, type Page } from '@playwright/test';
+import data from '../src/content/messenger.json' with { type: 'json' };
+const dayById: Record<string,number> = {message_welcome:1,message_request:3,message_broadcast:4,message_admin:5,message_homeroom:6,message_approval_return:7,message_approval_done:9,message_exam_schedule:10,message_room_change:12,message_budget_close:14,message_final:15};
+async function seed(page: Page, day: number, taskStatuses = {}) {
+ await page.goto('/');
+ await page.evaluate(({day,taskStatuses})=>localStorage.setItem('teachers-please-save-v1',JSON.stringify({version:8,state:{currentDay:day,taskStatuses}})),{day,taskStatuses});
+ await page.reload();
+}
+for(const [id,message] of Object.entries(data)) test(`messenger ${id}: reply, evidence and saved transcript`,async({page})=>{
+ await seed(page,dayById[id]);
+ await page.getByRole('button',{name:'핫메신저',exact:true}).click();
+ await page.locator('.conversation-list button').filter({hasText:message.name.ko}).click();
+ const composer=page.locator('.chat-composer');
+ await expect(composer.getByRole('button',{name:'전송',exact:true})).toBeDisabled();
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('teachers-please-save-v1')!).state);
+ expect(saved.taskStatuses[id]).toBe('available');
+ await composer.getByLabel('답장 의도').selectOption('guess');
+ await composer.getByRole('button',{name:'답장 예시 넣기',exact:true}).click();
+ await composer.getByRole('button',{name:'전송',exact:true}).click();
+ await expect(page.getByRole('alert')).toBeVisible();
+ if(message.attachment) await page.locator('.chat-entry').last().getByRole('button',{name:/첨부 열기/}).click();
+ await composer.getByLabel('답장 의도').selectOption(message.intent);
+ await composer.getByRole('button',{name:'답장 예시 넣기',exact:true}).click();
+ if(id==='message_admin') await composer.getByRole('checkbox').check();
+ await composer.getByLabel('받는 사람').selectOption('all');
+ await composer.getByRole('button',{name:'전송',exact:true}).click();
+ await expect(page.getByRole('alert')).toContainText('받는 사람');
+ await composer.getByLabel('받는 사람').selectOption(message.contact);
+ const text=await composer.getByLabel('답장 내용').inputValue();
+ await page.reload();await page.getByRole('button',{name:'핫메신저',exact:true}).click();
+ await page.locator('.conversation-list button').filter({hasText:message.name.ko}).click();
+ await expect(composer.getByLabel('답장 내용')).toHaveValue(text);
+ await composer.getByRole('button',{name:'전송',exact:true}).click();
+ await page.getByRole('dialog').getByRole('button',{name:'확인',exact:true}).click();
+ await expect(page.locator('.chat-entry').last().locator('.chat-bubble.sent')).toContainText(text);
+ await expect(page.locator('.chat-entry').last().locator('.chat-bubble.received').last()).toHaveText(message.reply.ko);
+ await page.reload();await page.getByRole('button',{name:'핫메신저',exact:true}).click();
+ await page.locator('.conversation-list button').filter({hasText:message.name.ko}).click();
+ await expect(page.locator('.chat-entry').last().locator('.chat-bubble.sent')).toContainText(text);
+});

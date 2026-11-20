@@ -195,3 +195,39 @@ fieldset:disabled { opacity: .65; }
   .sequence-slots { flex-wrap: wrap; }
   .sequence-slots li { min-width: 90px; }
 }
+.hot-messenger { display:flex; flex-direction:column; min-height:0; background:#edf0ea; color:#2b3836; border:1px solid #a4b5ad; }
+.messenger-brand { background:#315c51; color:#fff5d9; padding:14px; display:flex; gap:12px; align-items:center; }
+.messenger-brand small { margin-left:auto; font-size:.75rem; }
+.messenger-layout { display:grid; grid-template-columns:220px minmax(0,1fr); min-height:420px; }
+.conversation-list { background:#e0e7de; padding:12px; border-right:1px solid #b5c2b8; overflow:auto; }
+.conversation-list input { width:100%; margin-top:6px; }
+.conversation-list button { display:block; width:100%; text-align:left; padding:14px 10px; background:transparent; border:0; border-bottom:1px solid #bfccbf; color:#304c44; }
+.conversation-list button span { display:block; font-size:.8rem; margin-top:6px; }
+.conversation-list button em { background:#ad4c3b; color:white; border-radius:12px; padding:2px 8px; }
+.conversation-pane { display:flex; flex-direction:column; min-width:0; }
+.conversation-heading { padding:12px; background:#f7faf3; border-bottom:1px solid #b9c6b8; display:flex; align-items:center; gap:12px; }
+.chat-history { padding:16px; overflow:auto; flex:1; }
+.chat-date { text-align:center; color:#63756b; font-size:.78rem; }
+.chat-bubble { white-space:pre-wrap; overflow-wrap:anywhere; padding:14px 18px; margin:12px 0; max-width:90%; border:1px solid #c2cdbd; line-height:1.7; }
+.chat-bubble.received { background:#fffdf1; border-radius:0 14px 14px; }
+.chat-bubble.sent { background:#d5e5bb; margin-left:auto; border-radius:14px 0 14px 14px; }
+.chat-bubble small { display:block; margin-top:8px; }
+.delivery-state { display:block; text-align:right; color:#567452; }
+.chat-composer { border-top:1px solid #b9c8ba; margin-top:18px; padding:14px; background:#f8faf4; }
+.chat-composer label { display:block; font-size:.88rem; margin:10px 0; }
+.chat-composer select, .chat-composer textarea { display:block; width:100%; padding:10px; font:inherit; margin-top:6px; }
+.chat-composer button, .conversation-pane button { padding:10px 14px; color:#fff; background:#3e6557; border:0; min-height:44px; }
+.chat-composer .chat-send { display:block; margin-left:auto; background:#a04939; }
+.chat-composer [role=alert] { color:#913f30; }
+.reply-goal, .messenger-note { font-size:.8rem; color:#596d61; }
+.messenger-note { margin:0; padding:12px; background:#e3e9dc; }
+.attachment-preview { background:#fffbef; border:2px solid #baa783; padding:20px; }
+.messenger-empty { padding:30px; }
+.messenger-compact { flex:1; overflow:auto; }
+.messenger-compact .messenger-layout { display:block; }
+.messenger-compact .has-conversation .conversation-list { display:none; }
+.messenger-compact .messenger-empty { display:none; }
+.messenger-compact .messenger-brand small { display:none; }
+@media(max-width:700px) { .messenger-layout { display:block; } .has-conversation .conversation-list { display:none; } .messenger-brand small { display:none; } .chat-history { padding:10px; } .chat-bubble { max-width:96%; } .workspace-message .workspace-body { padding:0; } }
+.workspace-message > .workspace-brief { display:none; }
+.workspace-message .workspace-body { margin-top:16px; }

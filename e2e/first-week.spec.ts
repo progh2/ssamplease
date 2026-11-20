@@ -1,3 +1,4 @@
+import { replyMessage } from './helpers/messenger';
 import { finishLab } from './helpers/lessonLab';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -6,6 +7,7 @@ async function open(page: Page, title: string) {
   await expect(page.getByRole('region', { name: title, exact: true })).toBeVisible();
 }
 async function finish(page: Page, name: string) {
+  if (['메시지 읽기', '요청 확인'].includes(name)) { await replyMessage(page); return; }
   await page.getByRole('button', { name, exact: true }).click();
   await page.getByRole('dialog').getByRole('button', { name: '확인', exact: true }).click();
 }

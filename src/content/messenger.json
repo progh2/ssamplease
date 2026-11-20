@@ -1,0 +1,304 @@
+{
+  "message_welcome": {
+    "contact": "mentor",
+    "name": {
+      "ko": "김한결 · 선배 교사",
+      "en": "Hangeul Kim · Mentor"
+    },
+    "subject": {
+      "ko": "첫날 안내",
+      "en": "First-day guidance"
+    },
+    "body": {
+      "ko": "선생님, 환영합니다. 오늘은 사진 공개 동의서 3장을 확인하고 2교시 2-1 정보 수업을 맡아 주세요. 비동의도 정상 접수입니다. 모르는 점은 이 대화방으로 물어보세요.",
+      "en": "Welcome! Please check three photo consent forms, then teach period 2 in 2-1. Refusals are valid. Ask questions in this chat."
+    },
+    "goal": {
+      "ko": "오늘 맡은 업무와 수업을 확인했다는 답장을 보내세요.",
+      "en": "Reply acknowledging today’s paperwork and class."
+    },
+    "reply": {
+      "ko": "감사합니다. 먼저 서류부터 확인해 주세요. 교실 이동은 시간표에서 확인할 수 있어요.",
+      "en": "Thank you. Start with the forms; your classroom is in the timetable."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_request": {
+    "contact": "academic",
+    "name": {
+      "ko": "교무부 · 이서진",
+      "en": "Seojin Lee · Academic affairs"
+    },
+    "subject": {
+      "ko": "평가 정리 요청",
+      "en": "Assessment request"
+    },
+    "body": {
+      "ko": "이번 주 서술형 채점은 과정과 결과 점수를 나눠 기록해 주세요. 판독이 어려운 원본은 공동 검토로 남겨도 됩니다.",
+      "en": "Record process and result credit separately. Unreadable originals may be referred for joint review."
+    },
+    "goal": {
+      "ko": "채점 기준을 따르고 판독 불가는 검토로 남기겠다고 답하세요.",
+      "en": "Confirm rubric marking and referral of unreadable work."
+    },
+    "reply": {
+      "ko": "네, 점수를 추측하지 않고 근거를 남기는 것이 중요합니다.",
+      "en": "Yes. Keep evidence rather than guessing a mark."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_broadcast": {
+    "contact": "broadcast",
+    "name": {
+      "ko": "방송반 담당 · 윤도현",
+      "en": "Dohyun Yoon · Broadcasting"
+    },
+    "subject": {
+      "ko": "방송실 점검 부탁",
+      "en": "Broadcast-room check"
+    },
+    "body": {
+      "ko": "출장으로 자리를 비웁니다. 방송 소리가 간헐적으로 끊긴다니 각 장비를 점검해 주세요. 고장 원인은 확인 전 확정하지 마세요.",
+      "en": "I am away. Please inspect the intermittent sound fault. Do not assign a cause before checking."
+    },
+    "goal": {
+      "ko": "점검을 맡고 확인 결과를 기록하겠다고 답하세요.",
+      "en": "Accept the inspection and promise an evidence-based record."
+    },
+    "reply": {
+      "ko": "고맙습니다. 점검표는 행정실 문의와 구매 요청에도 쓰입니다.",
+      "en": "Thanks. The inspection record will support the office inquiry and purchase request."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_admin": {
+    "contact": "admin",
+    "name": {
+      "ko": "행정실 · 박수현",
+      "en": "Suhyun Park · Administration"
+    },
+    "subject": {
+      "ko": "케이블 교체 문의",
+      "en": "Cable replacement inquiry"
+    },
+    "body": {
+      "ko": "점검 기록을 확인했습니다. 구매 조건이 필요하면 손상 증상을 적고 장비점검표를 첨부해 문의해 주세요.",
+      "en": "I saw the inspection note. To request purchase guidance, describe the fault and attach the inspection report."
+    },
+    "goal": {
+      "ko": "행정실에 손상 증상과 점검표를 보내 구매 조건을 문의하세요.",
+      "en": "Ask administration about purchasing, with the fault and inspection report."
+    },
+    "reply": {
+      "ko": "XLR 5m는 개당 15,000원입니다. 방송반 예산은 40,000원이고 담당→행정실→교감 결재입니다. 오늘은 예비 케이블로 임시 복구해 주세요.",
+      "en": "A 5m XLR cable costs 15,000 KRW; the club budget is 40,000. Route: teacher→administration→vice principal. Use a spare temporarily."
+    },
+    "intent": "inquiry",
+    "attachment": {
+      "name": {
+        "ko": "장비점검표.pdf",
+        "en": "Inspection report.pdf"
+      },
+      "body": {
+        "ko": "케이블 단자를 움직이면 신호가 끊김. 예비 케이블에서 정상. 원본 케이블 교체 필요.",
+        "en": "Moving the connector interrupts the signal. A spare works. Replace the original cable."
+      }
+    }
+  },
+  "message_homeroom": {
+    "contact": "mentor",
+    "name": {
+      "ko": "김한결 · 선배 교사",
+      "en": "Hangeul Kim · Mentor"
+    },
+    "subject": {
+      "ko": "임시 담임 요청",
+      "en": "Acting homeroom request"
+    },
+    "body": {
+      "ko": "담임 선생님이 오늘 출근하지 못합니다. 2학년 3반 아침 출결 확인을 부탁드립니다. 교실 확인·등교 기록·행사 승인 자료를 대조해 주세요.",
+      "en": "The homeroom teacher is absent. Please check 2-3 attendance against classroom, arrival and event records."
+    },
+    "goal": {
+      "ko": "임시 담임 업무 범위를 확인하고 맡겠다고 답하세요.",
+      "en": "Acknowledge and accept the acting homeroom duties."
+    },
+    "reply": {
+      "ko": "확인되지 않은 사유는 추측하지 말고 연락 시도와 함께 확인 중으로 기록하세요.",
+      "en": "Keep unknown reasons pending and record contact attempts."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_approval_return": {
+    "contact": "admin",
+    "name": {
+      "ko": "행정실 · 박수현",
+      "en": "Suhyun Park · Administration"
+    },
+    "subject": {
+      "ko": "구매 기안 보완 요청",
+      "en": "Purchase revision request"
+    },
+    "body": {
+      "ko": "구매 기안에 같은 규격의 가격 비교 근거가 빠졌습니다. 반려 사유서를 열어 확인하고 보완 계획을 답해 주세요.",
+      "en": "Equivalent-specification quote evidence is missing. Open the revision note and reply with your plan."
+    },
+    "goal": {
+      "ko": "반려 사유를 읽고 같은 규격 견적을 비교해 보완하겠다고 답하세요.",
+      "en": "Read the note and reply that you will compare equivalent quotes."
+    },
+    "reply": {
+      "ko": "네, 기존 기안을 수정해 재제출하세요. 새 기안을 중복 작성하지 않아도 됩니다.",
+      "en": "Revise the existing request and resubmit; no duplicate is needed."
+    },
+    "intent": "revise",
+    "attachment": {
+      "name": {
+        "ko": "보완요청서.pdf",
+        "en": "Revision note.pdf"
+      },
+      "body": {
+        "ko": "5m XLR 케이블을 같은 수량·규격끼리 비교. 가장 싼 3m 제품은 비교 대상으로 부적합.",
+        "en": "Compare equal quantities of 5m XLR cables. A cheaper 3m cable is not equivalent."
+      }
+    }
+  },
+  "message_approval_done": {
+    "contact": "admin",
+    "name": {
+      "ko": "행정실 · 박수현",
+      "en": "Suhyun Park · Administration"
+    },
+    "subject": {
+      "ko": "구매 요청 승인",
+      "en": "Purchase approved"
+    },
+    "body": {
+      "ko": "비교 견적 보완이 확인되어 구매가 승인되었습니다. 제출했던 수량으로 시행 공문을 작성해 주세요.",
+      "en": "The revised purchase is approved. Prepare the dispatch memo using the submitted quantity."
+    },
+    "goal": {
+      "ko": "승인 내용을 확인하고 기존 수량으로 공문을 작성하겠다고 답하세요.",
+      "en": "Acknowledge approval and confirm using the existing quantity."
+    },
+    "reply": {
+      "ko": "시행 공문에는 수신처·합계·점검표 첨부를 다시 대조해 주세요.",
+      "en": "Recheck the recipient, total and inspection attachment."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_exam_schedule": {
+    "contact": "exam",
+    "name": {
+      "ko": "평가 담당 · 정유진",
+      "en": "Yujin Jung · Exams"
+    },
+    "subject": {
+      "ko": "시험 감독표 전달",
+      "en": "Invigilation schedule"
+    },
+    "body": {
+      "ko": "감독표를 첨부합니다. 본인 일정만 확인해 답장해 주세요. 시험 자료 봉입은 확인 후 진행합니다.",
+      "en": "Schedule attached. Check your own assignments and reply before packing materials."
+    },
+    "goal": {
+      "ko": "첨부 감독표를 열고 본인 일정을 확인해 답하세요.",
+      "en": "Open the schedule and acknowledge your assignments."
+    },
+    "reply": {
+      "ko": "확인 감사합니다. 변경 공지가 오면 새 공지를 우선하세요.",
+      "en": "Thank you. A later change notice overrides this schedule."
+    },
+    "intent": "ack",
+    "attachment": {
+      "name": {
+        "ko": "시험감독표.pdf",
+        "en": "Invigilation schedule.pdf"
+      },
+      "body": {
+        "ko": "신규 교사: 월 1교시 2-3 / 화 2교시 2-1. 김한결 교사: 화 1교시 2-2.",
+        "en": "You: Mon P1 2-3 / Tue P2 2-1. Hangeul Kim: Tue P1 2-2."
+      }
+    }
+  },
+  "message_room_change": {
+    "contact": "exam",
+    "name": {
+      "ko": "평가 담당 · 정유진",
+      "en": "Yujin Jung · Exams"
+    },
+    "subject": {
+      "ko": "감독 교실 변경 공지",
+      "en": "Invigilation room changed"
+    },
+    "body": {
+      "ko": "오늘 2교시 감독 교실이 2-1에서 2-4로 변경되었습니다. 변경 공지를 읽고 새 교실을 확인해 답장해 주세요.",
+      "en": "Today’s period 2 room changed from 2-1 to 2-4. Read the notice and reply confirming the new room."
+    },
+    "goal": {
+      "ko": "변경된 2-4 교실을 확인했다는 답장을 보내세요.",
+      "en": "Reply confirming the new room, 2-4."
+    },
+    "reply": {
+      "ko": "네, 2교시 2-4입니다. 시험지 문항 문의는 담당자에게 확인해 전체에 같은 안내를 전달하세요.",
+      "en": "Correct: P2 in 2-4. Refer wording questions to the subject teacher and share confirmed guidance equally."
+    },
+    "intent": "room",
+    "attachment": null
+  },
+  "message_budget_close": {
+    "contact": "admin",
+    "name": {
+      "ko": "행정실 · 박수현",
+      "en": "Suhyun Park · Administration"
+    },
+    "subject": {
+      "ko": "케이블 검수와 집행 완료",
+      "en": "Cable delivery and budget closed"
+    },
+    "body": {
+      "ko": "요청 케이블의 검수와 예산 집행을 마쳤습니다. 물품을 방송실에 인계한 것으로 기록했으니 확인해 주세요.",
+      "en": "Cable inspection and payment are complete. The handover to the broadcast room is recorded; please acknowledge."
+    },
+    "goal": {
+      "ko": "검수·인계 내용을 확인했다고 답하세요.",
+      "en": "Acknowledge the inspection and handover."
+    },
+    "reply": {
+      "ko": "이 구매 건은 종료되었습니다. 다음에는 남은 예비품도 먼저 확인해 주세요.",
+      "en": "This purchase is closed. Check spare stock before the next request."
+    },
+    "intent": "ack",
+    "attachment": null
+  },
+  "message_final": {
+    "contact": "mentor",
+    "name": {
+      "ko": "김한결 · 선배 교사",
+      "en": "Hangeul Kim · Mentor"
+    },
+    "subject": {
+      "ko": "첫 3주 수고했어요",
+      "en": "Your first three weeks"
+    },
+    "body": {
+      "ko": "첫 3주 고생 많았어요. 이제 교무실이 조금 익숙해졌죠? 앞으로도 혼자 확정하기 어려운 일은 함께 확인해요.",
+      "en": "Well done on your first three weeks. When something is uncertain, let’s keep checking together."
+    },
+    "goal": {
+      "ko": "선배에게 인사와 앞으로의 업무 다짐을 답장하세요.",
+      "en": "Reply to your mentor with thanks and a plan for future work."
+    },
+    "reply": {
+      "ko": "언제든 물어보세요. 오늘은 책상 정리하고 퇴근해요!",
+      "en": "Ask anytime. Tidy the desk and head home!"
+    },
+    "intent": "thanks",
+    "attachment": null
+  }
+}

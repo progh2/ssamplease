@@ -1,3 +1,4 @@
+import { replyMessage } from './helpers/messenger';
 import { expect, test, type Page } from '@playwright/test';
 import attendance from '../src/content/attendance.json' with { type: 'json' };
 import grading from '../src/content/grading.json' with { type: 'json' };
@@ -125,7 +126,7 @@ test('approved purchase quantity carries into reviewed dispatch', async ({ page 
   await seed(page, { currentDay: 9, purchaseQuantity: 1 });
   await expect(page.getByRole('button', { name: '업무 시작 · 방송 장비 구매 공문 작성', exact: true })).toBeDisabled();
   await open(page, '구매 요청 승인');
-  await page.getByRole('button', { name: '메시지 읽기', exact: true }).click(); await close(page);
+  await replyMessage(page);
   await open(page, '방송 장비 구매 공문 작성');
   await page.getByLabel('공문 제목').fill('승인된 방송 케이블 구매 시행');
   await page.getByLabel('수신처').selectOption('admin');
