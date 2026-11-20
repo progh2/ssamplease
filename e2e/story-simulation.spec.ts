@@ -1,7 +1,7 @@
+import { markBatch } from './helpers/marking';
 import { replyMessage } from './helpers/messenger';
 import { expect, test, type Page } from '@playwright/test';
 import attendance from '../src/content/attendance.json' with { type: 'json' };
-import grading from '../src/content/grading.json' with { type: 'json' };
 import examDesk from '../src/content/examDesk.json' with { type: 'json' };
 
 async function seed(page: Page, state: object) {
@@ -98,21 +98,9 @@ for (const [id, data] of Object.entries(attendance)) test(`attendance ${id}: evi
 });
 
 for (const id of ['grading_review', 'grading_post_exam'] as const) test(`later marking ${id} is a full batch`, async ({ page }) => {
-  const data = grading[id];
   await seed(page, { currentDay: id === 'grading_review' ? 9 : 14 });
   await open(page, id === 'grading_review' ? '채점 기록 재확인' : '시험 채점');
-  for (const paper of data.papers) {
-    if (paper.ambiguous) {
-      await page.getByLabel('공동 검토 사유 (필요한 경우만)').selectOption('unreadable');
-      await page.getByRole('button', { name: '원본 보존 후 공동 검토 요청', exact: true }).click();
-    } else {
-      for (const criterion of data.criteria.filter(c => paper.credits.includes(c.id))) await page.getByRole('checkbox', { name: `${criterion.label} (+${criterion.points})`, exact: true }).check();
-      await page.getByLabel('학생에게 남길 피드백').selectOption(paper.comment);
-      await page.getByRole('button', { name: '점수와 피드백 기록', exact: true }).click();
-    }
-  }
-  await page.getByRole('radio', { name: id === 'grading_review' ? /실행 순서와 각 단계의 이유/ : /같은 생활 사례로 AND와 OR/ }).check();
-  await page.getByRole('button', { name: '채점 기록과 수업 메모 저장', exact: true }).click(); await close(page);
+  await markBatch(page, id);
   if (id === 'grading_review') {
     await page.getByRole('button', { name: /교실로 이동/ }).click();
     await open(page, '2교시 정보 수업');

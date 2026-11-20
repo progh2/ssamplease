@@ -1,3 +1,4 @@
+import { markBatch } from './helpers/marking';
 import { replyMessage } from './helpers/messenger';
 import { finishLab } from './helpers/lessonLab';
 import { expect, test, type Page } from '@playwright/test';
@@ -66,32 +67,11 @@ test('first three days use separate workspaces and retain completion', async ({ 
   await finish(page, '접수 기록 마무리');
   await lesson(page, '3교시 정보 수업');
   await open(page, '형성평가 채점');
-  await page.getByRole('button', { name: '점수와 피드백 기록', exact: true }).click();
-  await expect(page.getByRole('alert')).toBeVisible();
-  for (const comment of ['clear', 'order', 'clear']) {
-    if (comment === 'clear') {
-      await page.getByRole('checkbox', { name: /정해진 순서대로/ }).check();
-      await page.getByRole('checkbox', { name: /한 단계 뒤에/ }).check();
-    }
-    await page.getByLabel('학생에게 남길 피드백').selectOption(comment);
-    await page.getByRole('button', { name: '점수와 피드백 기록', exact: true }).click();
-  }
-  await page.getByRole('radio', { name: /실행 순서와 각 단계의 이유/ }).check();
-  await finish(page, '채점 기록과 수업 메모 저장');
+  await markBatch(page, 'grading_basic');
   await page.locator('footer button').click();
   await open(page, '교무부 업무 요청'); await finish(page, '요청 확인');
   await open(page, '서술형 채점');
-  await page.getByRole('checkbox', { name: /0에서 시작해/ }).check();
-  await page.getByLabel('학생에게 남길 피드백').selectOption('result');
-  await page.getByRole('button', { name: '점수와 피드백 기록', exact: true }).click();
-  await page.getByRole('checkbox', { name: /0에서 시작해/ }).check();
-  await page.getByRole('checkbox', { name: /최종 결과 6/ }).check();
-  await page.getByLabel('학생에게 남길 피드백').selectOption('clear');
-  await page.getByRole('button', { name: '점수와 피드백 기록', exact: true }).click();
-  await page.getByLabel('공동 검토 사유 (필요한 경우만)').selectOption('unreadable');
-  await page.getByRole('button', { name: '원본 보존 후 공동 검토 요청', exact: true }).click();
-  await page.getByRole('radio', { name: /과정은 인정하고 마지막 계산/ }).check();
-  await finish(page, '채점 기록과 수업 메모 저장');
+  await markBatch(page, 'grading_partial');
   await lesson(page, '4교시 정보 수업');
   await page.reload();
   await expect(page.locator('.day-badge')).toHaveText('03');
