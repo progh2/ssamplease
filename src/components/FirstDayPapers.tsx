@@ -1,0 +1,11 @@
+import { useTranslation } from 'react-i18next';
+import documents from '../content/exercises.json';
+import { useDraftState } from './useDraftState';
+export function FirstDayPapers({ onDone }: { onDone: () => void }) {
+ const en = useTranslation().i18n.language.startsWith('en');
+ const [index,setIndex]=useDraftState<number>('notice_basic','stampIndex',0,n=>Number.isInteger(n)&&n>=0&&n<=3);
+ const [stamped,setStamped]=useDraftState<boolean>('notice_basic','stamped',false);
+ const [ink,setInk]=useDraftState<string>('notice_basic','ink','red',v=>['red','blue'].includes(v));
+ const paper=documents.notice_basic[index];
+ return <section className="first-paper-game"><h2>{en?'Your first stamp':'첫 도장은 가볍게!'}</h2><p>{en?'Three complete forms. Choose ink, stamp, then put each paper in the tray.':'오늘은 세 장 모두 이상 없어요. 잉크를 고르고 종이에 도장을 꾹!'}</p><div className="ink-picker"><button aria-pressed={ink==='red'} onClick={()=>setInk('red')}>{en?'Red ink':'빨간 잉크'}</button><button aria-pressed={ink==='blue'} onClick={()=>setInk('blue')}>{en?'Blue ink':'파란 잉크'}</button></div>{paper?<><button className={`stamp-paper ink-${ink}`} disabled={stamped} aria-label={en?'Stamp the paper':'서류에 도장 찍기'} onClick={()=>setStamped(true)}><small>{index+1} / 3 · {en?'PHOTO CONSENT':'사진 공개 동의서'}</small><h3>{en?paper.nameEn:paper.name}</h3><p>{en?paper.noteEn:paper.note}</p><p>{paper.consent==='no'?(en?'Photo publication restricted':'사진 공개 제한'):(en?'Photo publication allowed':'사진 공개 동의')}</p>{stamped?<strong className="paper-ink">{en?'RECEIVED':'접수'}</strong>:<span>{en?'Stamp here ↓':'여기에 꾹 ↓'}</span>}</button>{stamped&&<p role="status">{index===0?(en?'Thump! That sounded official.':'쿵! 방금 조금 선생님 같았어요.'):index===1?(en?'Jiwoo: “Thanks for respecting our choice.”':'지우: “비동의도 받아 주셔서 감사해요!”'):(en?'The paper mountain is now a tiny hill.':'서류 산이 작은 언덕이 됐습니다.')}</p>}<button disabled={!stamped} onClick={()=>{setIndex(index+1);setStamped(false);}}>{en?'Put in the done tray':'처리함에 쏙 넣기'}</button></>:<div className="lesson-reflection"><h3>{en?'Desk space recovered!':'책상 한 칸 확보!'}</h3><p>{en?'Three forms received. Your first class is next.':'세 장 접수 끝. 이제 첫 수업을 만나러 가요.'}</p><button onClick={onDone}>{en?'Finish paperwork':'서류 정리 끝!'}</button></div>}</section>;
+}

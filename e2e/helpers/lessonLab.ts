@@ -1,7 +1,8 @@
 import { expect, type Page } from '@playwright/test';
 import labs from '../../src/content/lessonLabs.json' with { type: 'json' };
 export async function finishLab(page: Page, id: string, en = false) {
-  const lab = labs[id as keyof typeof labs];
+  await page.getByRole('button',{name:en?'Try a bonus activity':'한 번 더 놀아보기',exact:true}).click();
+ const lab = labs[id as keyof typeof labs];
   const lang = en ? 'en' : 'ko';
   await expect(page.getByRole('heading', {name:lab.title[lang],exact:true})).toBeVisible();
   await page.getByRole('button',{name:en?'Compare the class responses':'학생 활동 결과 대조',exact:true}).click();

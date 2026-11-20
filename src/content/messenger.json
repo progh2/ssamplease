@@ -10,8 +10,8 @@
       "en": "First-day guidance"
     },
     "body": {
-      "ko": "선생님, 환영합니다. 오늘은 사진 공개 동의서 3장을 확인하고 2교시 2-1 정보 수업을 맡아 주세요. 비동의도 정상 접수입니다. 모르는 점은 이 대화방으로 물어보세요.",
-      "en": "Welcome! Please check three photo consent forms, then teach period 2 in 2-1. Refusals are valid. Ask questions in this chat."
+      "ko": "첫날은 서류 세 장, 그리고 첫 수업이에요. 커피는… 살아 돌아오면 같이 마셔요 ☕",
+      "en": "Three forms, then your first class. Coffee is waiting when you make it back ☕"
     },
     "goal": {
       "ko": "오늘 맡은 업무와 수업을 확인했다는 답장을 보내세요.",
@@ -22,7 +22,33 @@
       "en": "Thank you. Start with the forms; your classroom is in the timetable."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "네! 일단 출발합니다",
+          "en": "On it!"
+        },
+        "reply": {
+          "ko": "좋아요. 서류를 책상에 올려뒀어요.",
+          "en": "Great. The forms are on your desk."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "교실 위치부터 알려 주세요 😅",
+          "en": "Where is my classroom? 😅"
+        },
+        "reply": {
+          "ko": "2-1이에요. 저도 첫날엔 방송실로 들어갔어요. 시간표에서 이동하면 돼요!",
+          "en": "2-1. I walked into the broadcast room on my first day. Use your timetable!"
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_request": {
     "contact": "academic",
@@ -35,8 +61,8 @@
       "en": "Assessment request"
     },
     "body": {
-      "ko": "이번 주 서술형 채점은 과정과 결과 점수를 나눠 기록해 주세요. 판독이 어려운 원본은 공동 검토로 남겨도 됩니다.",
-      "en": "Record process and result credit separately. Unreadable originals may be referred for joint review."
+      "ko": "채점 부탁드려요! 학생들 답이 제각각이라 빨간 펜이 바쁘겠네요.",
+      "en": "Could you mark these? The red pen has quite a day ahead."
     },
     "goal": {
       "ko": "채점 기준을 따르고 판독 불가는 검토로 남기겠다고 답하세요.",
@@ -47,7 +73,33 @@
       "en": "Yes. Keep evidence rather than guessing a mark."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "빨간 펜 준비 완료!",
+          "en": "Red pen ready!"
+        },
+        "reply": {
+          "ko": "든든하네요. 답안은 책상에 둘게요.",
+          "en": "Thanks! Papers are on your desk."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "애매한 답은 같이 볼까요?",
+          "en": "Can we review tricky ones together?"
+        },
+        "reply": {
+          "ko": "물론이죠. 혼자 끙끙 앓지 말고 검토함에 넣어요.",
+          "en": "Of course. Put tricky ones in the review tray."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_broadcast": {
     "contact": "broadcast",
@@ -60,8 +112,8 @@
       "en": "Broadcast-room check"
     },
     "body": {
-      "ko": "출장으로 자리를 비웁니다. 방송 소리가 간헐적으로 끊긴다니 각 장비를 점검해 주세요. 고장 원인은 확인 전 확정하지 마세요.",
-      "en": "I am away. Please inspect the intermittent sound fault. Do not assign a cause before checking."
+      "ko": "잠깐만요! 방송 소리가 자꾸 끊긴대요. 오늘 방송실 좀 봐주실래요?",
+      "en": "One more thing! The broadcast keeps cutting out. Could you check the room?"
     },
     "goal": {
       "ko": "점검을 맡고 확인 결과를 기록하겠다고 답하세요.",
@@ -72,7 +124,33 @@
       "en": "Thanks. The inspection record will support the office inquiry and purchase request."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "방송실로 가볼게요",
+          "en": "I will check it out"
+        },
+        "reply": {
+          "ko": "고마워요! 하늘이가 장비 앞에서 기다려요.",
+          "en": "Thanks! Haneul is by the equipment."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "저도 기계는 살짝 무서운데요",
+          "en": "Machines make me nervous too"
+        },
+        "reply": {
+          "ko": "저도요 😂 일단 버튼 하나씩 시험해 봐요.",
+          "en": "Same 😂 Try the test buttons one by one."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_admin": {
     "contact": "admin",
@@ -85,8 +163,8 @@
       "en": "Cable replacement inquiry"
     },
     "body": {
-      "ko": "점검 기록을 확인했습니다. 구매 조건이 필요하면 손상 증상을 적고 장비점검표를 첨부해 문의해 주세요.",
-      "en": "I saw the inspection note. To request purchase guidance, describe the fault and attach the inspection report."
+      "ko": "케이블 문제라면서요? 점검표는 받았어요. 교체품 구매 도와드릴게요.",
+      "en": "A cable fault? I have the inspection note. Let’s get a replacement."
     },
     "goal": {
       "ko": "행정실에 손상 증상과 점검표를 보내 구매 조건을 문의하세요.",
@@ -106,7 +184,33 @@
         "ko": "케이블 단자를 움직이면 신호가 끊김. 예비 케이블에서 정상. 원본 케이블 교체 필요.",
         "en": "Moving the connector interrupts the signal. A spare works. Replace the original cable."
       }
-    }
+    },
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "구매 진행할게요",
+          "en": "Let’s order it"
+        },
+        "reply": {
+          "ko": "5m 케이블은 15,000원, 예산은 40,000원이에요. 기안 화면에 적어뒀어요.",
+          "en": "5m costs 15,000; budget is 40,000. Details are in the purchase form."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "오늘 방송은 어떻게 하죠?",
+          "en": "What about today’s broadcast?"
+        },
+        "reply": {
+          "ko": "예비 케이블을 빌려뒀어요. 오늘은 그걸로 살려보고 구매는 그다음!",
+          "en": "I borrowed a spare. Get today’s broadcast working, then order!"
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_homeroom": {
     "contact": "mentor",
@@ -119,8 +223,8 @@
       "en": "Acting homeroom request"
     },
     "body": {
-      "ko": "담임 선생님이 오늘 출근하지 못합니다. 2학년 3반 아침 출결 확인을 부탁드립니다. 교실 확인·등교 기록·행사 승인 자료를 대조해 주세요.",
-      "en": "The homeroom teacher is absent. Please check 2-3 attendance against classroom, arrival and event records."
+      "ko": "담임 선생님이 못 나오신대요. 오늘 2-3반 부탁드려요. 출석부가 선생님을 찾습니다…",
+      "en": "The homeroom teacher is away. Could you cover 2-3? The register is looking for you…"
     },
     "goal": {
       "ko": "임시 담임 업무 범위를 확인하고 맡겠다고 답하세요.",
@@ -131,7 +235,33 @@
       "en": "Keep unknown reasons pending and record contact attempts."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "제가 가볼게요",
+          "en": "I will head over"
+        },
+        "reply": {
+          "ko": "고마워요. 출석부는 책상에 올려둘게요.",
+          "en": "Thanks. The register is on your desk."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "출석부랑 아직 낯가리는데요",
+          "en": "The register and I barely know each other"
+        },
+        "reply": {
+          "ko": "오늘 친해지면 되죠 😄 자료함도 같이 보냈어요.",
+          "en": "You will bond today 😄 The reference folder is there too."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_approval_return": {
     "contact": "admin",
@@ -144,8 +274,8 @@
       "en": "Purchase revision request"
     },
     "body": {
-      "ko": "구매 기안에 같은 규격의 가격 비교 근거가 빠졌습니다. 반려 사유서를 열어 확인하고 보완 계획을 답해 주세요.",
-      "en": "Equivalent-specification quote evidence is missing. Open the revision note and reply with your plan."
+      "ko": "기안이 돌아왔어요. 큰일은 아니고 견적 하나만 더 필요하대요.",
+      "en": "The request came back. Nothing dramatic: one more comparable quote."
     },
     "goal": {
       "ko": "반려 사유를 읽고 같은 규격 견적을 비교해 보완하겠다고 답하세요.",
@@ -165,7 +295,33 @@
         "ko": "5m XLR 케이블을 같은 수량·규격끼리 비교. 가장 싼 3m 제품은 비교 대상으로 부적합.",
         "en": "Compare equal quantities of 5m XLR cables. A cheaper 3m cable is not equivalent."
       }
-    }
+    },
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "수정해서 다시 보낼게요",
+          "en": "I will revise it"
+        },
+        "reply": {
+          "ko": "네, 기존 기안에서 이어 하면 돼요!",
+          "en": "Yes, continue from the existing draft!"
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "기안도 왕복 운동을 하네요",
+          "en": "The request is getting its exercise"
+        },
+        "reply": {
+          "ko": "학교 문서의 기본 체력입니다 😂 비교 견적 칸을 열어보세요.",
+          "en": "Paperwork cardio 😂 Open the comparison panel."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_approval_done": {
     "contact": "admin",
@@ -178,8 +334,8 @@
       "en": "Purchase approved"
     },
     "body": {
-      "ko": "비교 견적 보완이 확인되어 구매가 승인되었습니다. 제출했던 수량으로 시행 공문을 작성해 주세요.",
-      "en": "The revised purchase is approved. Prepare the dispatch memo using the submitted quantity."
+      "ko": "케이블 구매 승인 났어요! 이제 시행 공문만 남았습니다.",
+      "en": "The cable purchase is approved! Just the dispatch memo left."
     },
     "goal": {
       "ko": "승인 내용을 확인하고 기존 수량으로 공문을 작성하겠다고 답하세요.",
@@ -190,7 +346,33 @@
       "en": "Recheck the recipient, total and inspection attachment."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "마지막 관문이네요!",
+          "en": "The final gate!"
+        },
+        "reply": {
+          "ko": "거의 다 왔어요. 수량은 이전 기안 그대로 가져올게요.",
+          "en": "Almost there. We will keep the original quantity."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "케이블보다 문서가 더 길어요",
+          "en": "The paperwork is longer than the cable"
+        },
+        "reply": {
+          "ko": "😂 그건 부정할 수 없네요. 공문 화면 열어뒀어요.",
+          "en": "😂 Cannot argue. The memo screen is ready."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_exam_schedule": {
     "contact": "exam",
@@ -203,8 +385,8 @@
       "en": "Invigilation schedule"
     },
     "body": {
-      "ko": "감독표를 첨부합니다. 본인 일정만 확인해 답장해 주세요. 시험 자료 봉입은 확인 후 진행합니다.",
-      "en": "Schedule attached. Check your own assignments and reply before packing materials."
+      "ko": "다음 주 감독표 보냅니다. 월요일 1교시 2-3, 화요일 2교시 2-1이에요.",
+      "en": "Next week: Monday P1 in 2-3, Tuesday P2 in 2-1. Schedule attached."
     },
     "goal": {
       "ko": "첨부 감독표를 열고 본인 일정을 확인해 답하세요.",
@@ -224,7 +406,33 @@
         "ko": "신규 교사: 월 1교시 2-3 / 화 2교시 2-1. 김한결 교사: 화 1교시 2-2.",
         "en": "You: Mon P1 2-3 / Tue P2 2-1. Hangeul Kim: Tue P1 2-2."
       }
-    }
+    },
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "확인했어요!",
+          "en": "Got it!"
+        },
+        "reply": {
+          "ko": "시험 자료 봉투도 책상에 올려뒀어요.",
+          "en": "The materials envelope is on your desk."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "저도 학생들만큼 긴장되네요",
+          "en": "I am as nervous as the students"
+        },
+        "reply": {
+          "ko": "첫 감독은 다 그래요. 안내는 현장에서도 볼 수 있어요.",
+          "en": "Everyone is on their first one. The guide will be there."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_room_change": {
     "contact": "exam",
@@ -237,8 +445,8 @@
       "en": "Invigilation room changed"
     },
     "body": {
-      "ko": "오늘 2교시 감독 교실이 2-1에서 2-4로 변경되었습니다. 변경 공지를 읽고 새 교실을 확인해 답장해 주세요.",
-      "en": "Today’s period 2 room changed from 2-1 to 2-4. Read the notice and reply confirming the new room."
+      "ko": "오늘 감독 교실 2-4로 변경됐어요! 2-1로 가면 다른 선생님 만나요 😅",
+      "en": "Today’s room is now 2-4! Go to 2-1 and you will meet another teacher 😅"
     },
     "goal": {
       "ko": "변경된 2-4 교실을 확인했다는 답장을 보내세요.",
@@ -249,7 +457,33 @@
       "en": "Correct: P2 in 2-4. Refer wording questions to the subject teacher and share confirmed guidance equally."
     },
     "intent": "room",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "2-4로 갈게요!",
+          "en": "Heading to 2-4!"
+        },
+        "reply": {
+          "ko": "네, 시간표에도 바꿔뒀어요.",
+          "en": "Updated in your timetable too."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "이미 2-1 앞인데요…",
+          "en": "I am already outside 2-1…"
+        },
+        "reply": {
+          "ko": "복도 조금만 더요 😂 2-4에서 뵈어요.",
+          "en": "A little farther down the hall 😂 See you in 2-4."
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_budget_close": {
     "contact": "admin",
@@ -262,8 +496,8 @@
       "en": "Cable delivery and budget closed"
     },
     "body": {
-      "ko": "요청 케이블의 검수와 예산 집행을 마쳤습니다. 물품을 방송실에 인계한 것으로 기록했으니 확인해 주세요.",
-      "en": "Cable inspection and payment are complete. The handover to the broadcast room is recorded; please acknowledge."
+      "ko": "케이블 검수랑 집행까지 끝났어요. 드디어 이 대화방에도 평화가!",
+      "en": "Delivery and payment are done. Peace returns to this chat!"
     },
     "goal": {
       "ko": "검수·인계 내용을 확인했다고 답하세요.",
@@ -274,7 +508,33 @@
       "en": "This purchase is closed. Check spare stock before the next request."
     },
     "intent": "ack",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "고생하셨어요 ☕",
+          "en": "Thanks for everything ☕"
+        },
+        "reply": {
+          "ko": "선생님도요! 다음 방송은 편하게 들읍시다.",
+          "en": "You too! Let’s enjoy the next broadcast."
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "다음엔 무선으로 살까요?",
+          "en": "Shall we go wireless next time?"
+        },
+        "reply": {
+          "ko": "그럼 충전기 기안이 옵니다 😂 오늘은 여기까지!",
+          "en": "Then we will need a charger request 😂 Enough for today!"
+        },
+        "style": "curious"
+      }
+    ]
   },
   "message_final": {
     "contact": "mentor",
@@ -287,8 +547,8 @@
       "en": "Your first three weeks"
     },
     "body": {
-      "ko": "첫 3주 고생 많았어요. 이제 교무실이 조금 익숙해졌죠? 앞으로도 혼자 확정하기 어려운 일은 함께 확인해요.",
-      "en": "Well done on your first three weeks. When something is uncertain, let’s keep checking together."
+      "ko": "첫 3주 수고했어요. 처음엔 비어 있던 책상이 꽤 북적이죠?",
+      "en": "Well done on three weeks. That empty desk looks busy now!"
     },
     "goal": {
       "ko": "선배에게 인사와 앞으로의 업무 다짐을 답장하세요.",
@@ -299,6 +559,32 @@
       "en": "Ask anytime. Tidy the desk and head home!"
     },
     "intent": "thanks",
-    "attachment": null
+    "attachment": null,
+    "quickReplies": [
+      {
+        "id": "ready",
+        "text": {
+          "ko": "이제 제 자리 같아요",
+          "en": "It feels like my desk now"
+        },
+        "reply": {
+          "ko": "내일도 그 자리예요. 오늘은 푹 쉬어요!",
+          "en": "It will be there tomorrow. Rest well!"
+        },
+        "style": "ready"
+      },
+      {
+        "id": "curious",
+        "text": {
+          "ko": "커피 약속 아직 유효하죠?",
+          "en": "Is that coffee offer still good?"
+        },
+        "reply": {
+          "ko": "당연하죠 ☕ 퇴근하면서 같이 가요.",
+          "en": "Of course ☕ Let’s go on the way home."
+        },
+        "style": "curious"
+      }
+    ]
   }
 }

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { FirstDayPapers } from './components/FirstDayPapers';
 import { HotMessenger } from './components/HotMessenger';
 import { createPortal } from 'react-dom';
 import { PhoneGame, OfficialDocumentGame } from './components/SchoolActivities';
@@ -36,6 +37,7 @@ export function App() {
   const day = days.find((entry) => entry.day === currentDay);
   const pending = day ? requiredTasksRemaining(day.tasks, taskStatuses).length : 0;
   const done = !!day && canLeaveSchool(day.tasks, taskStatuses);
+  useEffect(() => { if (selectedTask && ['completed', 'resolved_with_issue'].includes(taskStatuses[selectedTask])) setSelectedTask(null); }, [selectedTask, taskStatuses]);
 
   const changeLanguage = () => {
     const next = i18n.language.startsWith('ko') ? 'en' : 'ko';
@@ -90,7 +92,8 @@ export function App() {
               {task.id === 'official_document' && <OfficialDocumentGame onDone={(status, feedback) => { completeTask(task.id, status, feedback); setSelectedTask(null); }} />}
               {task.id === 'equipment_check' && <EquipmentCheck onDone={() => completeTask(task.id, 'completed', t('feedback.equipmentFound'))} />}
               {task.id.startsWith('omr_') && <OmrGame taskId={task.id} missing={task.id === 'omr_missing'} onDone={status => completeTask(task.id, status, status === 'resolved_with_issue' ? (en ? 'Original preserved and flagged for identity confirmation. All 28 cards are included in the handover.' : '원본을 보존하고 기재 사항 확인 필요로 분리했습니다. 별도 확인 카드까지 28장으로 인계합니다.') : t(task.choices[0].feedbackKey))} />}
-              {!isDone && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
+              {task.id === 'notice_basic' && <FirstDayPapers onDone={() => completeTask(task.id, 'completed', en ? 'Three forms received. First class, here we come!' : '서류 세 장 접수! 첫 수업을 만나러 가요.')} />}
+              {!isDone && task.id !== 'notice_basic' && exerciseIds.includes(task.id) && <DeskExercise taskId={task.id} onDone={(status, feedbackKey) => completeTask(task.id, status, t(feedbackKey))} />}
               {!isDone && task.id === 'cable_repair' && <CableRepairGame onDone={() => completeTask(task.id, 'completed', t('feedback.repaired'))} />}
               {!isDone && task.id === 'edugreat_purchase' && <PurchaseGame onDone={() => completeTask(task.id, 'completed', t('feedback.submitted'))} />}
               {!isDone && task.id === 'approval_revision' && <RevisionGame onDone={() => completeTask(task.id, 'completed', t('feedback.approvalResubmitted'))} />}

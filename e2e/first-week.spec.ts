@@ -49,13 +49,11 @@ test('first three days use separate workspaces and retain completion', async ({ 
   await expect(page.getByRole('button', { name: '업무 시작 · 가정통신문 3장 확인', exact: true })).toBeDisabled();
   await open(page, '선배 교사의 환영 메시지'); await finish(page, '메시지 읽기');
   await open(page, '가정통신문 3장 확인');
-  await page.getByRole('button', { name: '보완 요청하기', exact: true }).click();
-  await expect(page.getByRole('alert')).toBeVisible();
-  for (const permission of ['allow', 'restrict', 'allow']) {
-    await page.getByLabel('사진 공개 범위 기록').selectOption(permission);
-    await page.getByRole('button', { name: '확인 도장 찍기', exact: true }).click();
+  for (let i = 0; i < 3; i++) {
+    await page.getByRole('button', { name: '서류에 도장 찍기', exact: true }).click();
+    await page.getByRole('button', { name: '처리함에 쏙 넣기', exact: true }).click();
   }
-  await finish(page, '접수 기록 마무리');
+  await finish(page, '서류 정리 끝!');
   await lesson(page, '2교시 정보 수업');
   await page.locator('footer button').click();
   await open(page, '가정통신문 재확인');

@@ -231,3 +231,16 @@ fieldset:disabled { opacity: .65; }
 @media(max-width:700px) { .messenger-layout { display:block; } .has-conversation .conversation-list { display:none; } .messenger-brand small { display:none; } .chat-history { padding:10px; } .chat-bubble { max-width:96%; } .workspace-message .workspace-body { padding:0; } }
 .workspace-message > .workspace-brief { display:none; }
 .workspace-message .workspace-body { margin-top:16px; }
+.quick-replies { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.quick-replies button { flex:1 1 180px; text-align:left; border-radius:16px; background:#fff8df; color:#355448; border:2px solid #6f9177; box-shadow:0 3px #bacbb4; }
+.quick-replies button:hover { transform:translateY(-2px); background:#e8f0cb; }
+.quick-replies button span { float:right; }
+.quick-note { font-size:.75rem; color:#667760; margin-bottom:0; }
+.quick-composer { padding:14px; border-radius:12px; }
+.first-paper-game { max-width:640px; margin:auto; }
+.ink-picker { display:flex; gap:12px; margin:16px 0; }
+.ink-picker button,.first-paper-game > button { border:0; padding:12px 18px; background:#456556; color:white; min-height:44px; }
+.first-paper-game .stamp-paper { position:relative; display:block; width:100%; min-height:280px; background:#fffaf0; color:#453a2d; border:1px solid #bbaa8b; text-align:left; padding:32px; box-shadow:6px 8px #a58b6735; opacity:1; margin-bottom:18px; }
+.paper-ink { display:block; width:90px; padding:12px; text-align:center; border:5px double currentColor; color:#b04a3b; font-size:1.5rem; transform:rotate(-12deg); animation:stamp-pop .2s ease-out; }
+.ink-blue .paper-ink { color:#366c9b; }
+@keyframes stamp-pop { from {transform:scale(1.3) rotate(-12deg);opacity:0;} to {transform:scale(1) rotate(-12deg);opacity:1;} }

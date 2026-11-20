@@ -8,3 +8,12 @@ it('every message task has a sender, bilingual conversation and a reachable repl
   expect(Object.keys(messages).sort()).toEqual(days.flatMap(day=>day.tasks.filter(t=>t.kind==='message').map(t=>t.id)).sort());
   for(const message of Object.values(messages)) expect(()=>schema.parse(message)).not.toThrow();
 });
+
+it('offers two valid replies with different character reactions in every conversation', () => {
+ for (const message of Object.values(messages)) {
+  expect(message.quickReplies).toHaveLength(2);
+  expect(new Set(message.quickReplies.map(choice=>choice.id)).size).toBe(2);
+  expect(new Set(message.quickReplies.map(choice=>choice.reply.ko)).size).toBe(2);
+  for (const choice of message.quickReplies) { expect(choice.text.en.length).toBeGreaterThan(0); expect(choice.reply.en.length).toBeGreaterThan(0); }
+ }
+});
