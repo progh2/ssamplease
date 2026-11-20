@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { lessons, lessonPasses, localizedSample } from '../engine/lessons';
 import { useDraftState } from './useDraftState';
 import { useGameStore } from '../store';
+import { LessonLab } from './LessonLab';
 
 type Props = { taskId: string; onDone: (status: 'completed' | 'resolved_with_issue', feedback: string) => void };
 
@@ -31,13 +32,14 @@ export function LessonGame({ taskId, onDone }: Props) {
   const [exitAnswer, setExitAnswer] = useDraftState<string>(taskId, 'lessonExit', '', value => value === '' || lesson.exitOptions.some(option => option.id === value));
   const [checked, setChecked] = useDraftState<boolean>(taskId, 'lessonExitChecked', false);
   const [hint, setHint] = useState(false);
+  const [labDone, setLabDone] = useDraftState<boolean>(taskId, 'lessonLabDone', false);
   const passed = tested && lessonPasses(lesson, order, rule);
   const readyForQuestion = demonstrated && passed;
   const understood = checked && !!lesson.exitOptions.find(option => option.id === exitAnswer)?.correct;
   const option = lesson.options?.find(item => item.id === rule);
   const resetResult = () => { setTested(false); setDemonstrated(false); setChecked(false); };
   const finish = () => {
-    if (!approach || !readyForQuestion || !understood || warmup && !warmupDone) return;
+    if (!approach || !readyForQuestion || !understood || !labDone || warmup && !warmupDone) return;
     const method = approach === 'pairs' ? (en ? 'peer explanation' : '짝 설명') : (en ? 'teacher demonstration' : '교사 시연');
     onDone('completed', en
       ? `${lesson.title.en}: the class tested ${lesson.cases.length} examples through ${method} and explained the transfer question. ${runs > 1 ? 'A failed test became evidence for revising the rule.' : 'The examples supported the proposed rule.'}`
@@ -72,7 +74,7 @@ export function LessonGame({ taskId, onDone }: Props) {
         {tested && <p role={passed ? 'status' : 'alert'}>{passed ? (en ? 'Every example matches. Now ask a student to apply the idea to a new situation.' : '모든 예제가 맞았습니다. 이제 학생에게 새로운 상황을 설명해 달라고 해보세요.') : (en ? 'The mismatch is useful evidence. Compare the failed example, change your process, and test again.' : '다른 결과가 나온 예제가 단서입니다. 어떤 조건에서 달라졌는지 보고 고친 뒤 다시 시험하세요.')}</p>}
         {passed && <button onClick={() => setDemonstrated(true)}>{en ? 'Ask the class to explain' : '학생 설명 듣기'}</button>}
       </div> : !understood ? <div className="lesson-board"><h3>{en ? 'Apply it to a new situation' : '새로운 상황에 적용하기'}</h3><blockquote>{lesson.question[language]}</blockquote><p>{approach === 'pairs' ? (en ? 'The pairs offer two explanations. Choose the one to share with the class.' : '짝들이 두 가지 설명을 내놓았습니다. 함께 정리할 설명을 고르세요.') : (en ? 'A student extends your demonstration. Choose the explanation that checks their understanding.' : '학생이 시연을 새 상황에 적용했습니다. 이해를 확인할 설명을 고르세요.')}</p><div className="choices">{lesson.exitOptions.map(answer => <button key={answer.id} aria-pressed={exitAnswer === answer.id} onClick={() => { setExitAnswer(answer.id); setChecked(false); }}>{answer[language]}</button>)}</div><button disabled={!exitAnswer} onClick={() => setChecked(true)}>{en ? 'Check the explanation' : '설명 확인하기'}</button>{checked && !understood && <p role="alert">{lesson.hint[language]} {en ? 'Revise the explanation together.' : '함께 설명을 고쳐보세요.'}</p>}<button onClick={() => { setDemonstrated(false); setChecked(false); }}>{en ? 'Return to the examples' : '예제로 돌아가기'}</button></div>
-          : <div className="lesson-reflection"><h3>{en ? 'The class can explain why' : '이제 학생들이 이유를 설명합니다'}</h3><p>{approach === 'pairs' ? (en ? 'Jiwoo and Minjun compare their first predictions, then present one shared explanation. A quiet pair joins the discussion.' : '지우와 민준이 처음 예측을 비교하고 하나의 설명으로 정리했습니다. 조용하던 짝도 발표에 참여합니다.') : (en ? 'Minjun explains the final example without your help. The common model gives the class a clear point of reference.' : '민준이 마지막 예제를 도움 없이 설명했습니다. 공통 예제가 생겨 학생들이 같은 기준으로 이야기합니다.')}</p><p>{en ? `${lesson.cases.length} examples verified · ${runs} test runs · Transfer question explained` : `예제 ${lesson.cases.length}개 검증 · ${runs}회 실행 · 새 상황 설명 완료`}</p><p>{runs > 1 ? (en ? 'Revisions are part of learning, not a penalty.' : '고쳐 실행한 과정도 배움입니다. 재시도 횟수는 감점하지 않습니다.') : (en ? 'Next time, invite students to invent a counterexample.' : '다음에는 학생에게 반례를 만들어 달라고 해보세요.')}</p><button onClick={finish}>{en ? 'Record the lesson and finish' : '수업 기록 후 마치기'}</button></div>}
+          : !labDone ? <LessonLab taskId={taskId} onComplete={() => setLabDone(true)} /> : <div className="lesson-reflection"><h3>{en ? 'The class can explain why' : '이제 학생들이 이유를 설명합니다'}</h3><p>{approach === 'pairs' ? (en ? 'Jiwoo and Minjun compare their first predictions, then present one shared explanation. A quiet pair joins the discussion.' : '지우와 민준이 처음 예측을 비교하고 하나의 설명으로 정리했습니다. 조용하던 짝도 발표에 참여합니다.') : (en ? 'Minjun explains the final example without your help. The common model gives the class a clear point of reference.' : '민준이 마지막 예제를 도움 없이 설명했습니다. 공통 예제가 생겨 학생들이 같은 기준으로 이야기합니다.')}</p><p>{en ? `${lesson.cases.length} examples verified · ${runs} test runs · Transfer question explained` : `예제 ${lesson.cases.length}개 검증 · ${runs}회 실행 · 새 상황 설명 완료`}</p><p>{runs > 1 ? (en ? 'Revisions are part of learning, not a penalty.' : '고쳐 실행한 과정도 배움입니다. 재시도 횟수는 감점하지 않습니다.') : (en ? 'Next time, invite students to invent a counterexample.' : '다음에는 학생에게 반례를 만들어 달라고 해보세요.')}</p><button onClick={finish}>{en ? 'Record the lesson and finish' : '수업 기록 후 마치기'}</button></div>}
     </>}
   </section>;
 }

@@ -1,3 +1,4 @@
+import { finishLab } from './helpers/lessonLab';
 import { expect, test, type Page } from '@playwright/test';
 
 const scenarios = [
@@ -53,6 +54,7 @@ for (const scenario of scenarios) {
     }
     await page.getByRole('button', { name: scenario.answer, exact: true }).click();
     await page.getByRole('button', { name: '설명 확인하기', exact: true }).click();
+    await finishLab(page, scenario.id);
     await expect(page.getByRole('heading', { name: '이제 학생들이 이유를 설명합니다', exact: true })).toBeVisible();
     await page.getByRole('button', { name: '수업 기록 후 마치기', exact: true }).click();
     await page.getByRole('dialog').getByRole('button', { name: '확인', exact: true }).click();
@@ -78,6 +80,7 @@ test('English classroom preserves a Korean draft while changing language', async
   await page.getByRole('button', { name: 'Ask the class to explain', exact: true }).click();
   await page.getByRole('button', { name: 'Recalculate the total as price × quantity', exact: true }).click();
   await page.getByRole('button', { name: 'Check the explanation', exact: true }).click();
+  await finishLab(page, 'class_admin_day', true);
   await page.getByRole('button', { name: 'Record the lesson and finish', exact: true }).click();
   await expect(page.getByRole('dialog')).toContainText('peer explanation');
   await page.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();

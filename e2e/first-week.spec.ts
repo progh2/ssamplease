@@ -1,3 +1,4 @@
+import { finishLab } from './helpers/lessonLab';
 import { expect, test, type Page } from '@playwright/test';
 
 async function open(page: Page, title: string) {
@@ -31,6 +32,7 @@ async function lesson(page: Page, title: string) {
   const explanation = title.startsWith('2') ? '0도 값이다. 0 + 4의 출력은 4' : title.startsWith('3') ? '≥는 유지하고 기준 시각을 13으로 바꾼다' : '가장 작은 입력에서 반복이 빠지는지 확인하려고';
   await page.getByRole('button', { name: explanation, exact: true }).click();
   await page.getByRole('button', { name: '설명 확인하기', exact: true }).click();
+  await finishLab(page, title.startsWith('2') ? 'class_first' : title.startsWith('3') ? 'class_question' : 'class_followup');
   await finish(page, '수업 기록 후 마치기');
 }
 async function seed(page: Page, day: number, statuses = {}) {

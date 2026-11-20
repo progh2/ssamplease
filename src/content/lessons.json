@@ -3,8 +3,8 @@
     "id": "class_first",
     "mode": "sequence",
     "title": {
-      "ko": "급식 줄도 알고리즘일까?",
-      "en": "Is the lunch queue an algorithm?"
+      "ko": "계산기에서 급식 로봇까지",
+      "en": "From a calculator to a lunch robot"
     },
     "context": {
       "ko": "첫 수업. 지우는 “순서를 왜 배워요?”라고 묻습니다. 두 수를 더하는 계산기를 함께 만들어 설명해 보세요.",
@@ -372,8 +372,8 @@
       "en": "Who can see a conversation record?"
     },
     "context": {
-      "ko": "상담이 끝난 뒤, 학생들은 학급 앱의 정보 공개 범위를 토론합니다. 공지와 개인 상담 기록을 구분해 보세요.",
-      "en": "After a counseling session, the class discusses who should see information in the class app. Distinguish announcements from private notes."
+      "ko": "방과 후 상담 전, 가상 학급 앱의 정보 공개 범위를 토론합니다. 실제 학생의 기록 대신 가상 사례만 사용하세요.",
+      "en": "Before the after-school counseling session, discuss access in a fictional class app. Use fictional cases rather than real student records."
     },
     "options": [
       {

@@ -1,0 +1,580 @@
+{
+  "class_first": {
+    "title": {
+      "ko": "급식 로봇에게 정확히 말하기",
+      "en": "Give the lunch robot precise instructions"
+    },
+    "brief": {
+      "ko": "로봇은 써 있는 행동만 합니다. 꼭 필요한 행동과 불필요한 행동을 나눠 주세요.",
+      "en": "The robot only follows written instructions. Separate necessary and unnecessary actions."
+    },
+    "kind": "classify",
+    "bins": [
+      {
+        "id": "keep",
+        "label": {
+          "ko": "필요한 단계",
+          "en": "Necessary"
+        }
+      },
+      {
+        "id": "drop",
+        "label": {
+          "ko": "빼도 되는 단계",
+          "en": "Unnecessary"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "식판을 받는다",
+          "en": "Take a tray"
+        },
+        "target": "keep",
+        "explanation": {
+          "ko": "음식을 받을 그릇이 먼저 필요합니다.",
+          "en": "You need a container before receiving food."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "반찬을 받은 뒤 자리에 앉는다",
+          "en": "Receive food, then sit down"
+        },
+        "target": "keep",
+        "explanation": {
+          "ko": "식사를 시작하기 전 배식이 필요합니다.",
+          "en": "Collect food before eating."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "식판 색이 마음에 들 때까지 바꾼다",
+          "en": "Swap trays until you like the color"
+        },
+        "target": "drop",
+        "explanation": {
+          "ko": "목표와 관계없는 조건은 끝없이 반복될 수 있습니다.",
+          "en": "An unrelated condition can repeat forever."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "지우가 웃습니다. “로봇은 눈치로 알아듣지 못하네요!”",
+      "en": "Jiwoo laughs: “The robot cannot read our minds!”"
+    }
+  },
+  "class_question": {
+    "title": {
+      "ko": "방송 예약표의 반례 수집",
+      "en": "Collect counterexamples for the broadcast schedule"
+    },
+    "brief": {
+      "ko": "방송은 12시부터 13시 전까지만 켜야 합니다. 시간 카드마다 실제 동작을 예측하세요.",
+      "en": "The broadcast should run from 12 until just before 13. Predict each time card."
+    },
+    "kind": "predict",
+    "bins": [
+      {
+        "id": "on",
+        "label": {
+          "ko": "방송 켜짐",
+          "en": "Broadcast on"
+        }
+      },
+      {
+        "id": "off",
+        "label": {
+          "ko": "방송 꺼짐",
+          "en": "Broadcast off"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "11:59",
+          "en": "11:59"
+        },
+        "target": "off",
+        "explanation": {
+          "ko": "시작 시각에 도달하지 않았습니다.",
+          "en": "The start time has not arrived."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "12:00",
+          "en": "12:00"
+        },
+        "target": "on",
+        "explanation": {
+          "ko": "시작 경계값은 포함합니다.",
+          "en": "Include the starting boundary."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "12:59",
+          "en": "12:59"
+        },
+        "target": "on",
+        "explanation": {
+          "ko": "아직 종료 시각 전입니다.",
+          "en": "It is before the end."
+        }
+      },
+      {
+        "id": "3",
+        "text": {
+          "ko": "13:00",
+          "en": "13:00"
+        },
+        "target": "off",
+        "explanation": {
+          "ko": "종료 경계값은 포함하지 않습니다.",
+          "en": "Exclude the ending boundary."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "하늘이 “시작 조건만 맞추면 끝없이 켜지겠네요”라며 종료 조건을 덧붙입니다.",
+      "en": "Haneul adds an ending condition: “A start condition alone would leave it on forever.”"
+    }
+  },
+  "class_followup": {
+    "title": {
+      "ko": "반복문 추적표 복구",
+      "en": "Repair a loop trace"
+    },
+    "brief": {
+      "ko": "i를 1부터 3까지 더합니다. total은 0에서 시작합니다. 각 줄의 누적값을 채워 민준의 디버깅을 도와주세요.",
+      "en": "Add i from 1 through 3, starting total at zero. Fill each accumulated value."
+    },
+    "kind": "trace",
+    "bins": [
+      {
+        "id": "1",
+        "label": {
+          "ko": "누적값 1",
+          "en": "Total 1"
+        }
+      },
+      {
+        "id": "3",
+        "label": {
+          "ko": "누적값 3",
+          "en": "Total 3"
+        }
+      },
+      {
+        "id": "6",
+        "label": {
+          "ko": "누적값 6",
+          "en": "Total 6"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "i = 1: total = 0 + 1",
+          "en": "i = 1: total = 0 + 1"
+        },
+        "target": "1",
+        "explanation": {
+          "ko": "첫 번째 누적값은 1입니다.",
+          "en": "The first accumulated value is 1."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "i = 2: total = 이전 값 + 2",
+          "en": "i = 2: total = previous value + 2"
+        },
+        "target": "3",
+        "explanation": {
+          "ko": "직전 누적값 1에 2를 더합니다.",
+          "en": "Add 2 to the previous total of 1."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "i = 3: total = 이전 값 + 3",
+          "en": "i = 3: total = previous value + 3"
+        },
+        "target": "6",
+        "explanation": {
+          "ko": "직전 누적값 3에 3을 더합니다.",
+          "en": "Add 3 to the previous total of 3."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "민준: “반복 횟수 3과 더한 결과 6은 다른 값이군요.”",
+      "en": "Minjun: “Three repetitions and a sum of six are different values.”"
+    }
+  },
+  "class_broadcast_day": {
+    "title": {
+      "ko": "소리가 멈춘 구간 좁히기",
+      "en": "Narrow down a signal fault"
+    },
+    "brief": {
+      "ko": "관찰 기록이 원인을 뒷받침하는지 판단하세요. 장비를 무작정 교체하지 않습니다.",
+      "en": "Decide whether each observation supports a diagnosis. Avoid random replacements."
+    },
+    "kind": "evidence",
+    "bins": [
+      {
+        "id": "supported",
+        "label": {
+          "ko": "관찰로 뒷받침됨",
+          "en": "Supported"
+        }
+      },
+      {
+        "id": "unknown",
+        "label": {
+          "ko": "아직 판단 불가",
+          "en": "Not established"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "믹서 입력 미터 정상 → 마이크 입력은 도착함",
+          "en": "Mixer input meter normal → mic signal reaches mixer"
+        },
+        "target": "supported",
+        "explanation": {
+          "ko": "입력 지점에서 직접 확인한 사실입니다.",
+          "en": "The input meter directly supports this."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "스피커 무음 → 마이크가 반드시 고장",
+          "en": "Silent speaker → microphone must be broken"
+        },
+        "target": "unknown",
+        "explanation": {
+          "ko": "중간 연결이나 출력 설정도 원인일 수 있습니다.",
+          "en": "Intermediate connections or output settings may be responsible."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "예비 케이블에서 정상 → 기존 케이블을 비교 점검",
+          "en": "Spare cable works → compare original cable"
+        },
+        "target": "supported",
+        "explanation": {
+          "ko": "한 조건만 바꾼 비교 시험이 단서입니다.",
+          "en": "Changing one condition provides comparative evidence."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "학생들이 부품 이름 대신 “어디까지 신호가 왔는지” 설명하기 시작합니다.",
+      "en": "Students begin explaining how far the signal traveled instead of guessing a part name."
+    }
+  },
+  "class_homeroom": {
+    "title": {
+      "ko": "우리 반 데이터를 익명화하기",
+      "en": "Anonymize class data"
+    },
+    "brief": {
+      "ko": "수업용 통계표를 만듭니다. 개인을 알아볼 정보와 집계에 필요한 정보는 다릅니다.",
+      "en": "Build a classroom statistics sheet. Identifying details differ from aggregate data."
+    },
+    "kind": "classify",
+    "bins": [
+      {
+        "id": "aggregate",
+        "label": {
+          "ko": "통계로 공유 가능",
+          "en": "Share as aggregate"
+        }
+      },
+      {
+        "id": "private",
+        "label": {
+          "ko": "개인 기록에 보관",
+          "en": "Keep in private record"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "오늘 출석 26명, 지각 1명, 확인 중 1명",
+          "en": "Today: 26 present, 1 late, 1 pending"
+        },
+        "target": "aggregate",
+        "explanation": {
+          "ko": "이름 없는 전체 집계입니다.",
+          "en": "These are totals without names."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "김하늘의 보호자 연락처",
+          "en": "Haneul’s guardian phone number"
+        },
+        "target": "private",
+        "explanation": {
+          "ko": "연락처는 통계 활동에 필요하지 않습니다.",
+          "en": "A phone number is not needed for statistics."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "학생 이름과 병원 진료 사유",
+          "en": "Student name and medical reason"
+        },
+        "target": "private",
+        "explanation": {
+          "ko": "개인 사유를 학급에 공개할 필요가 없습니다.",
+          "en": "Personal reasons need not be shared with the class."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "지우: “빈칸을 함부로 채우지 않는 것뿐 아니라, 안 보여줄 정보도 있네요.”",
+      "en": "Jiwoo: “We should avoid both inventing missing facts and sharing unnecessary details.”"
+    }
+  },
+  "class_counseling_day": {
+    "title": {
+      "ko": "학급 앱 권한 회의",
+      "en": "Class app permissions meeting"
+    },
+    "brief": {
+      "ko": "학생들이 제안한 앱 기능을 검토합니다. 받아들일 제안과 고쳐야 할 제안을 나눠 주세요. 가상의 사례만 사용합니다.",
+      "en": "Review proposed app features. Accept or revise each proposal using fictional examples."
+    },
+    "kind": "debate",
+    "bins": [
+      {
+        "id": "accept",
+        "label": {
+          "ko": "채택할 제안",
+          "en": "Accept"
+        }
+      },
+      {
+        "id": "revise",
+        "label": {
+          "ko": "수정할 제안",
+          "en": "Revise"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "준비물 공지는 모두에게, 상담 기록은 담당자에게",
+          "en": "Materials notices to all; counseling notes to assigned staff"
+        },
+        "target": "accept",
+        "explanation": {
+          "ko": "목적에 맞는 공개 범위입니다.",
+          "en": "Access matches the purpose."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "친구를 돕도록 상담 기록을 단체방에 올리자",
+          "en": "Post counseling notes in the group chat so friends can help"
+        },
+        "target": "revise",
+        "explanation": {
+          "ko": "도우려는 뜻만으로 공개 범위를 넓히지 않습니다.",
+          "en": "Good intentions do not justify broad disclosure."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "잘못 공유한 기록은 접근을 막고 담당자에게 알리자",
+          "en": "Revoke access to a mistaken share and notify the responsible staff"
+        },
+        "target": "accept",
+        "explanation": {
+          "ko": "잘못을 숨기지 않고 수정 절차를 밟습니다.",
+          "en": "This corrects the mistake rather than hiding it."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "학생들이 실제 상담 이야기를 묻는 대신 가상 앱의 권한표를 함께 고칩니다.",
+      "en": "The class revises a fictional app’s permissions without discussing real counseling details."
+    }
+  },
+  "class_admin_day": {
+    "title": {
+      "ko": "동아리 장보기 계산대",
+      "en": "Club shopping calculator"
+    },
+    "brief": {
+      "ko": "예산 40,000원, 케이블 단가 15,000원입니다. 계산 결과와 구매 가능 여부를 짝지으세요.",
+      "en": "Budget: 40,000 KRW. Cables: 15,000 each. Match each basket to its total and decision."
+    },
+    "kind": "calculate",
+    "bins": [
+      {
+        "id": "15",
+        "label": {
+          "ko": "15,000원 · 가능",
+          "en": "15,000 · Allowed"
+        }
+      },
+      {
+        "id": "30",
+        "label": {
+          "ko": "30,000원 · 가능",
+          "en": "30,000 · Allowed"
+        }
+      },
+      {
+        "id": "45",
+        "label": {
+          "ko": "45,000원 · 초과",
+          "en": "45,000 · Over budget"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "케이블 2개",
+          "en": "Two cables"
+        },
+        "target": "30",
+        "explanation": {
+          "ko": "15,000 × 2 = 30,000원입니다.",
+          "en": "15,000 × 2 = 30,000."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "케이블 3개",
+          "en": "Three cables"
+        },
+        "target": "45",
+        "explanation": {
+          "ko": "수량이 적어 보여도 45,000원은 예산 초과입니다.",
+          "en": "Even three items cost more than this budget."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "케이블 1개",
+          "en": "One cable"
+        },
+        "target": "15",
+        "explanation": {
+          "ko": "1개면 15,000원이 필요합니다.",
+          "en": "One costs 15,000."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "민준: “가능 여부를 외우는 대신 단가가 바뀔 때 다시 계산해야겠어요.”",
+      "en": "Minjun: “I should recalculate when prices change instead of memorizing which basket is allowed.”"
+    }
+  },
+  "class_final": {
+    "title": {
+      "ko": "학생 발표에서 근거 찾기",
+      "en": "Find evidence in student presentations"
+    },
+    "brief": {
+      "ko": "이제 학생들이 학교 문제 해결안을 발표합니다. 검증한 결론과 추가 확인이 필요한 결론을 구분하세요.",
+      "en": "Students present solutions to school problems. Separate tested conclusions from claims needing more evidence."
+    },
+    "kind": "evidence",
+    "bins": [
+      {
+        "id": "verified",
+        "label": {
+          "ko": "검증한 결론",
+          "en": "Tested conclusion"
+        }
+      },
+      {
+        "id": "followup",
+        "label": {
+          "ko": "추가 확인 필요",
+          "en": "Needs follow-up"
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "0",
+        "text": {
+          "ko": "케이블만 바꾸고 같은 설정으로 두 번 시험해 정상 확인",
+          "en": "Only the cable changed; two tests at the same settings worked"
+        },
+        "target": "verified",
+        "explanation": {
+          "ko": "조건을 통제하고 반복해서 확인했습니다.",
+          "en": "The conditions were controlled and checked twice."
+        }
+      },
+      {
+        "id": "1",
+        "text": {
+          "ko": "친구가 아파 보이니 질병 결석이라고 확정",
+          "en": "A friend looked ill, so classify their absence as illness"
+        },
+        "target": "followup",
+        "explanation": {
+          "ko": "관찰과 확정된 사유는 다릅니다.",
+          "en": "An impression is not a confirmed reason."
+        }
+      },
+      {
+        "id": "2",
+        "text": {
+          "ko": "0, 1, 3을 시험해 반복 횟수 오류 수정 확인",
+          "en": "Tested 0, 1, 3 after fixing a loop-count error"
+        },
+        "target": "verified",
+        "explanation": {
+          "ko": "작은 입력과 경계값으로 수정 결과를 확인했습니다.",
+          "en": "Small inputs and boundaries test the fix."
+        }
+      }
+    ],
+    "ending": {
+      "ko": "첫날 질문하던 지우가 말합니다. “선생님도 우리랑 같이 시험하고 고쳤잖아요. 그게 알고리즘이네요.”",
+      "en": "Jiwoo recalls the first lesson: “You tested and revised things with us too. That is an algorithm.”"
+    }
+  }
+}
