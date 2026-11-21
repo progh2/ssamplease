@@ -1,7 +1,7 @@
 import { markBatch } from './helpers/marking';
 import { replyMessage } from './helpers/messenger';
 import { finishLab } from './helpers/lessonLab';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 async function open(page: Page, title: string) {
   await page.getByRole('button', { name: `업무 시작 · ${title}`, exact: true }).click();

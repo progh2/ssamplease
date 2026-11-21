@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import data from '../src/content/messenger.json' with { type: 'json' };
 const dayById: Record<string,number>={message_welcome:1,message_request:3,message_broadcast:4,message_admin:5,message_homeroom:6,message_approval_return:7,message_approval_done:9,message_exam_schedule:10,message_room_change:12,message_budget_close:14,message_final:15};
 for(const [id,message] of Object.entries(data)) test(`chat ${id}: two valid tones and a visible reaction`,async({page})=>{

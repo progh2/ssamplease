@@ -1,4 +1,4 @@
-import {expect,test} from '@playwright/test';
+import {expect,test} from './fixtures';
 test('stamp, doodle, correct and file without a quiz gate',async({page})=>{
  await page.goto('/');await page.evaluate(()=>localStorage.setItem('teachers-please-save-v1',JSON.stringify({version:8,state:{currentDay:2}})));await page.reload();
  const open=()=>page.getByRole('button',{name:'업무 시작 · 형성평가 채점',exact:true}).click();await open();

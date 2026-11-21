@@ -55,7 +55,7 @@ export function App() {
   return <main className="app-shell" inert={selectedTask !== null}>
     <header>
       <div><p className="eyebrow">{t('app.week', { week: Math.ceil(currentDay / 5) })} · {day.weekday}</p><h1>{t('app.title')} <small>{t('app.subtitle')}</small></h1></div>
-      <div className="header-actions"><span className="save-dot">● {t(saveFailed ? 'flow.saveFailed' : 'app.saved')}</span><button className="ghost" onClick={changeLanguage}>{t('app.language')}</button><button className="ghost" aria-label={t('app.restart')} onClick={restart}>↻</button></div>
+      <div className="header-actions"><span className="save-dot">● {t(saveFailed ? 'flow.saveFailed' : 'app.saved')}</span><button className="ghost" onClick={changeLanguage}>{t('app.language')}</button></div>
     </header>
     {saveFailed && <p role="alert" className="save-warning">{t('flow.saveFailed')}</p>}
     <section className="story-strip"><div className="day-badge">{String(currentDay).padStart(2, '0')}</div><div><strong>{t('app.day', { day: currentDay })} — {t(day.titleKey)}</strong><p>{t(day.introKey)}</p></div><span className="accuracy">{day.tasks.length - pending} / {day.tasks.length}</span></section>
@@ -74,7 +74,7 @@ export function App() {
             const scheduled = timetable[task.id];
             const needsRoom = !!scheduled && activeScheduledId !== task.id;
             return <article className={`task-card kind-${task.kind} ${isDone ? 'done' : ''}`} key={task.id}>
-              <div className="task-head"><span>{task.kind === 'message' ? 'HOT' : task.kind.toUpperCase()}</span><em>{t(`status.${status}`)}</em></div>
+              <div className="task-head"><span>{en ? task.kind.toUpperCase() : ({message:'대화',document:'서류',class:'수업',grading:'빨간 펜',equipment:'방송실',approval:'에듀그렛',attendance:'출석부',counseling:'이야기',exam:'시험'}[task.kind])}</span><em>{t(`status.${status}`)}</em></div>
               <h2>{t(task.titleKey)}</h2><p>{t(task.descriptionKey)}</p>
               {locked && <p>{prerequisites(task.id).map((id) => t(days.flatMap((entry) => entry.tasks).find((entry) => entry.id === id)!.titleKey)).join(' → ')} → {t(task.titleKey)}</p>}
               {!isDone && needsRoom && <button disabled={locked || currentLesson?.id !== task.id} onClick={() => enterClassroom(task.id)}>{t('flow.enter', { room: scheduled.classroom, period: scheduled.period })}</button>}

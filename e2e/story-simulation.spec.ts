@@ -1,6 +1,6 @@
 import { markBatch } from './helpers/marking';
 import { replyMessage } from './helpers/messenger';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 import attendance from '../src/content/attendance.json' with { type: 'json' };
 import examDesk from '../src/content/examDesk.json' with { type: 'json' };
 

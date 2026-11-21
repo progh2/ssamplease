@@ -1,5 +1,5 @@
 import { finishLab } from './helpers/lessonLab';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 const scenarios = [
   { day: 1, id: 'class_first', title: '2교시 정보 수업', cards: ['입력', '처리', '출력'], answer: '0도 값이다. 0 + 4의 출력은 4' },
